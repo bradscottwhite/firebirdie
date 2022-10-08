@@ -1,0 +1,52 @@
+type User @model
+	@auth(rules: [
+		{ allow: owner },
+		{ allow: public, operations: [read] }
+	])
+{
+	id: ID!
+	owner: String
+		@auth(rules: [
+			{ allow: owner, operations: [read, delete] },
+			{ allow: public, operations: [read] }
+		])
+		@index(name: "byOwner", queryField: "getUserByOwner")
+	username: String! @index(name: "byUsername", queryField: "getUserByUsername")
+	name: String!
+	avatar: String!
+	posts: [Post] @hasMany
+	comments: [Comment] @hasMany
+# more fields ...
+}
+
+type Post @model
+	@auth(rules: [
+		{ allow: owner },
+		{ allow: public, operations: [read] }
+	])
+{
+	id: ID!
+	owner: String @auth(rules: [
+		{ allow: owner, operations: [read, delete] },
+		{ allow: public, operations: [read] }
+	])
+	body: String!
+	postTime: AWSDateTime!
+	author: User @belongsTo
+	comments: [Comment] @hasMany
+}
+
+# make comments like posts???
+type Comment @model
+	@auth(rules: [
+		{ allow: owner },
+		{ allow: public, operations: [read] }
+	])
+{
+	id: ID!
+	owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+	body: String!
+	postTime: AWSDateTime!
+	user: User! @belongsTo
+	post: Post! @belongsTo
+}

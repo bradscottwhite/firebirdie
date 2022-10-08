@@ -1,15 +1,20 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-firebirdie-dev-94354-authRole",
-      "UnauthRoleArn": "arn:aws:iam::401622783535:role/amplify-firebirdie-dev-94354-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::401622783535:role/amplify-firebirdie-dev-94354-authRole",
+      "AuthRoleName": "amplify-firebirdie-dev-214943-authRole",
+      "UnauthRoleArn": "arn:aws:iam::401622783535:role/amplify-firebirdie-dev-214943-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::401622783535:role/amplify-firebirdie-dev-214943-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-firebirdie-dev-94354-deployment",
-      "UnauthRoleName": "amplify-firebirdie-dev-94354-unauthRole",
-      "StackName": "amplify-firebirdie-dev-94354",
-      "StackId": "arn:aws:cloudformation:us-east-1:401622783535:stack/amplify-firebirdie-dev-94354/16a26570-4646-11ed-95ab-0a3f508f5fb7",
-      "AmplifyAppId": "dgqltswlbkgkv"
+      "DeploymentBucketName": "amplify-firebirdie-dev-214943-deployment",
+      "UnauthRoleName": "amplify-firebirdie-dev-214943-unauthRole",
+      "StackName": "amplify-firebirdie-dev-214943",
+      "StackId": "arn:aws:cloudformation:us-east-1:401622783535:stack/amplify-firebirdie-dev-214943/7bd85340-46ab-11ed-b69c-1254e216e535",
+      "AmplifyAppId": "d3e9ksev6svovb"
+    },
+    "categories": {
+      "auth": {
+        "firebirdie032f950f": {}
+      }
     }
   }
 }

@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "firebirdie",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authfirebirdie032f950f",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
