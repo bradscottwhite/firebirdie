@@ -26,10 +26,12 @@ type Post @model
 	])
 {
 	id: ID!
-	owner: String @auth(rules: [
-		{ allow: owner, operations: [read, delete] },
-		{ allow: public, operations: [read] }
-	])
+	owner: String
+		@auth(rules: [
+			{ allow: owner, operations: [read, delete] },
+			{ allow: public, operations: [read] }
+		])
+		@index(name: "byOwner", queryField: "listPostsByOwner")
 	body: String!
 	postTime: AWSDateTime!
 	author: User @belongsTo

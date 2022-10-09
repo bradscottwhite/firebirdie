@@ -1,9 +1,19 @@
 import { Link } from 'react-router-dom'
 
-import { routes } from './routes'
+export const Main = ({ children, signOut, username }) => {
+	const routes = [
+		{
+			path: '/',
+			name: 'Home',
+		}, {
+			path: '/settings',
+			name: 'Settings',
+		}, {
+			path: `/${username}`,
+			name: 'Profile'
+		}
+	]
 
-export const Main = ({ children, signOut }) => {
-	
 	return (
 		<div>
 			{children}

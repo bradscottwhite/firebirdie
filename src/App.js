@@ -43,7 +43,7 @@ const LogIn = ({ username, signOut }) => {
 
 	return (
 		<BrowserRouter>
-			<Main signOut={signOut}>
+			<Main signOut={signOut} username={username}>
 				{loading ? (
 					<h2>Loading...</h2>
 				) : (

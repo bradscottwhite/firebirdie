@@ -206,6 +206,46 @@ export const listPosts = /* GraphQL */ `
     }
   }
 `;
+export const listPostsByOwner = /* GraphQL */ `
+  query ListPostsByOwner(
+    $owner: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPostsByOwner(
+      owner: $owner
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userPostsId
+      }
+      nextToken
+    }
+  }
+`;
 export const getComment = /* GraphQL */ `
   query GetComment($id: ID!) {
     getComment(id: $id) {

@@ -26,17 +26,21 @@ export const Post = ({ id, body, postTime, owner }) => {
 	//console.log(postTime)
 
 	return (
-		<Link to={`/${username}/${id}`}>
-			<div>
+		<div>
+			<Link to={`/${username}`}>
 				<img
 					alt={username}
 					src={avatar}
 					className='w-10 h-10 rounded-3xl'
 				/>
-				<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i> - {time}</h3>
+				<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i></h3>
+			</Link>
+			<h4> - {time}</h4>
+			
+			<Link to={`/${username}/${id}`}>
 				<p>{body}</p>
 				{/* likes, comments... */}
-			</div>
-		</Link>
+			</Link>	
+		</div>
 	)
 };
