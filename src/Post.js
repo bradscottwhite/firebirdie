@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
 import { getUserByUsername } from './graphql/queries'
 
-export const Post = ({ body, postTime, owner }) => {
+export const Post = ({ id, body, postTime, owner }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})
 
 	useEffect(() => {
@@ -25,15 +26,17 @@ export const Post = ({ body, postTime, owner }) => {
 	//console.log(postTime)
 
 	return (
-		<div>
-			<img
-				alt={username}
-				src={avatar}
-				className='w-10 h-10 rounded-3xl'
-			/>
-			<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i> - {time}</h3>
-			<p>{body}</p>
-			{/* likes, comments... */}
-		</div>
+		<Link to={`/${username}/${id}`}>
+			<div>
+				<img
+					alt={username}
+					src={avatar}
+					className='w-10 h-10 rounded-3xl'
+				/>
+				<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i> - {time}</h3>
+				<p>{body}</p>
+				{/* likes, comments... */}
+			</div>
+		</Link>
 	)
 };
