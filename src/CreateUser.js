@@ -8,7 +8,12 @@ export const CreateUser = ({ username, setUserData }) => {
 	const [ avatar, setAvatar ] = useState('')
 
 	const handleSubmit = async () => {
-		const avatarImg = avatar === '' ? `https://avatar.oxro.io/avatar.svg?name=${name}&length=1` : avatar
+		const letters = '0123456789ABCDEF'
+		let color = ''
+		for (let i = 0; i < 6; i++)
+			color += letters[Math.floor(Math.random() * 16)]
+
+		const avatarImg = avatar === '' ? `https://avatar.oxro.io/avatar.svg?name=${name}&background=${color}&length=1` : avatar
 		
 		const input = {
 			username,

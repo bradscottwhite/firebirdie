@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
-import { getUserByUsername, listPostsByOwner } from './graphql/queries'
+import { getUserByUsername, listPosts } from './graphql/queries'
 
 import { Post } from './Post'
 
@@ -29,10 +29,12 @@ export const User = () => {
 		const fetchPosts = async () => {
 			try {
 				const { data } = await API.graphql({
-					query: listPostsByOwner,
-					variables: { owner: username }
+					query: listPosts
 				})
-				setPosts(data.listPostsByOwner.items)
+				setPosts(
+					data.listPosts.items
+						.filter(post => post.owner === username)
+				)
 			} catch (err) {
 				console.log('error fetching posts for user', err)
 			}
@@ -47,7 +49,7 @@ export const User = () => {
 				src={avatar}
 				className='w-10 h-10 rounded-3xl'
 			/>
-			<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i></h3>
+			<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i> {username === owner && ' - You'}</h3>
 			
 			{posts.map(props => (
 				<Post {...props} />
