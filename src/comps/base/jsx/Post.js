@@ -11,6 +11,9 @@ import {
 	deletePostLike
 } from '../../../graphql/mutations'
 
+import { Avatar, Username } from '../styles/userStyles'
+import { PostBase } from '../styles/postStyles'
+
 export const Post = ({ userData, id, body, postTime, owner }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})
 	
@@ -49,10 +52,17 @@ export const Post = ({ userData, id, body, postTime, owner }) => {
 			}
 		}
 
-		const validateLikes = /*async*/ likes => {
-			// make sure each like is valid by having one user for each one
-			setLikes(likes)
-			return likes
+		const validateLikes = likes => {
+			// Make sure each like is valid by having one user for each one
+			const userLikes = {}
+			likes.map(({ owner, id }) => {
+				userLikes[owner] = id
+			})
+			let valLikes = []
+			for (let owner in userLikes)
+				valLikes.push({ id: userLikes[owner], owner })
+			setLikes(valLikes)
+			return valLikes
 		}
 		
 		fetchPostLikes()
@@ -90,14 +100,13 @@ export const Post = ({ userData, id, body, postTime, owner }) => {
 	//console.log(postTime)
 
 	return (
-		<div>
+		<PostBase>
 			<Link to={`/${username}`}>
-				<img
+				<Avatar
 					alt={username}
 					src={avatar}
-					className='w-10 h-10 rounded-3xl'
 				/>
-				<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i></h3>
+				<Username><b>{name}</b> <i>@{username}</i></Username>
 			</Link>
 			<h4> - {time}</h4>
 			
@@ -118,6 +127,6 @@ export const Post = ({ userData, id, body, postTime, owner }) => {
 					onClick={handleLike}
 				>Like</button>
 			)}
-		</div>
+		</PostBase>
 	)
 };
