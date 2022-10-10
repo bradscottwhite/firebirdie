@@ -36,6 +36,18 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
+      postLikes {
+        items {
+          id
+          owner
+          postId
+          createdAt
+          updatedAt
+          userPostLikesId
+          postLikesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -59,6 +71,9 @@ export const listUsers = /* GraphQL */ `
           nextToken
         }
         comments {
+          nextToken
+        }
+        postLikes {
           nextToken
         }
         createdAt
@@ -96,6 +111,9 @@ export const getUserByOwner = /* GraphQL */ `
         comments {
           nextToken
         }
+        postLikes {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -131,6 +149,9 @@ export const getUserByUsername = /* GraphQL */ `
         comments {
           nextToken
         }
+        postLikes {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -158,6 +179,9 @@ export const getPost = /* GraphQL */ `
         comments {
           nextToken
         }
+        postLikes {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -172,6 +196,18 @@ export const getPost = /* GraphQL */ `
           updatedAt
           userCommentsId
           postCommentsId
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          owner
+          postId
+          createdAt
+          updatedAt
+          userPostLikesId
+          postLikesId
         }
         nextToken
       }
@@ -206,9 +242,116 @@ export const listPosts = /* GraphQL */ `
         comments {
           nextToken
         }
+        likes {
+          nextToken
+        }
         createdAt
         updatedAt
         userPostsId
+      }
+      nextToken
+    }
+  }
+`;
+export const getPostLike = /* GraphQL */ `
+  query GetPostLike($id: ID!) {
+    getPostLike(id: $id) {
+      id
+      owner
+      postId
+      post {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userPostsId
+      }
+      createdAt
+      updatedAt
+      userPostLikesId
+      postLikesId
+    }
+  }
+`;
+export const listPostLikes = /* GraphQL */ `
+  query ListPostLikes(
+    $filter: ModelPostLikeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPostLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        owner
+        postId
+        post {
+          id
+          owner
+          body
+          postTime
+          createdAt
+          updatedAt
+          userPostsId
+        }
+        createdAt
+        updatedAt
+        userPostLikesId
+        postLikesId
+      }
+      nextToken
+    }
+  }
+`;
+export const listPostLikesByPostId = /* GraphQL */ `
+  query ListPostLikesByPostId(
+    $postId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostLikeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPostLikesByPostId(
+      postId: $postId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        owner
+        postId
+        post {
+          id
+          owner
+          body
+          postTime
+          createdAt
+          updatedAt
+          userPostsId
+        }
+        createdAt
+        updatedAt
+        userPostLikesId
+        postLikesId
       }
       nextToken
     }
@@ -234,6 +377,9 @@ export const getComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        postLikes {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -253,6 +399,9 @@ export const getComment = /* GraphQL */ `
           updatedAt
         }
         comments {
+          nextToken
+        }
+        likes {
           nextToken
         }
         createdAt

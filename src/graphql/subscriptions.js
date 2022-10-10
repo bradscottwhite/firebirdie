@@ -36,6 +36,18 @@ export const onCreateUser = /* GraphQL */ `
         }
         nextToken
       }
+      postLikes {
+        items {
+          id
+          owner
+          postId
+          createdAt
+          updatedAt
+          userPostLikesId
+          postLikesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -73,6 +85,18 @@ export const onUpdateUser = /* GraphQL */ `
           updatedAt
           userCommentsId
           postCommentsId
+        }
+        nextToken
+      }
+      postLikes {
+        items {
+          id
+          owner
+          postId
+          createdAt
+          updatedAt
+          userPostLikesId
+          postLikesId
         }
         nextToken
       }
@@ -116,6 +140,18 @@ export const onDeleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      postLikes {
+        items {
+          id
+          owner
+          postId
+          createdAt
+          updatedAt
+          userPostLikesId
+          postLikesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -141,6 +177,9 @@ export const onCreatePost = /* GraphQL */ `
         comments {
           nextToken
         }
+        postLikes {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -155,6 +194,18 @@ export const onCreatePost = /* GraphQL */ `
           updatedAt
           userCommentsId
           postCommentsId
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          owner
+          postId
+          createdAt
+          updatedAt
+          userPostLikesId
+          postLikesId
         }
         nextToken
       }
@@ -184,6 +235,9 @@ export const onUpdatePost = /* GraphQL */ `
         comments {
           nextToken
         }
+        postLikes {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -198,6 +252,18 @@ export const onUpdatePost = /* GraphQL */ `
           updatedAt
           userCommentsId
           postCommentsId
+        }
+        nextToken
+      }
+      likes {
+        items {
+          id
+          owner
+          postId
+          createdAt
+          updatedAt
+          userPostLikesId
+          postLikesId
         }
         nextToken
       }
@@ -227,6 +293,9 @@ export const onDeletePost = /* GraphQL */ `
         comments {
           nextToken
         }
+        postLikes {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -244,9 +313,135 @@ export const onDeletePost = /* GraphQL */ `
         }
         nextToken
       }
+      likes {
+        items {
+          id
+          owner
+          postId
+          createdAt
+          updatedAt
+          userPostLikesId
+          postLikesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       userPostsId
+    }
+  }
+`;
+export const onCreatePostLike = /* GraphQL */ `
+  subscription OnCreatePostLike($owner: String) {
+    onCreatePostLike(owner: $owner) {
+      id
+      owner
+      postId
+      post {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userPostsId
+      }
+      createdAt
+      updatedAt
+      userPostLikesId
+      postLikesId
+    }
+  }
+`;
+export const onUpdatePostLike = /* GraphQL */ `
+  subscription OnUpdatePostLike($owner: String) {
+    onUpdatePostLike(owner: $owner) {
+      id
+      owner
+      postId
+      post {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userPostsId
+      }
+      createdAt
+      updatedAt
+      userPostLikesId
+      postLikesId
+    }
+  }
+`;
+export const onDeletePostLike = /* GraphQL */ `
+  subscription OnDeletePostLike($owner: String) {
+    onDeletePostLike(owner: $owner) {
+      id
+      owner
+      postId
+      post {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userPostsId
+      }
+      createdAt
+      updatedAt
+      userPostLikesId
+      postLikesId
     }
   }
 `;
@@ -270,6 +465,9 @@ export const onCreateComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        postLikes {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -289,6 +487,9 @@ export const onCreateComment = /* GraphQL */ `
           updatedAt
         }
         comments {
+          nextToken
+        }
+        likes {
           nextToken
         }
         createdAt
@@ -323,6 +524,9 @@ export const onUpdateComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        postLikes {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -342,6 +546,9 @@ export const onUpdateComment = /* GraphQL */ `
           updatedAt
         }
         comments {
+          nextToken
+        }
+        likes {
           nextToken
         }
         createdAt
@@ -376,6 +583,9 @@ export const onDeleteComment = /* GraphQL */ `
         comments {
           nextToken
         }
+        postLikes {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -395,6 +605,9 @@ export const onDeleteComment = /* GraphQL */ `
           updatedAt
         }
         comments {
+          nextToken
+        }
+        likes {
           nextToken
         }
         createdAt

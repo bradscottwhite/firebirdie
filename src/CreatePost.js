@@ -13,7 +13,8 @@ export const CreatePost = ({ posts, setPosts, userData }) => {
 			try {
 				const input = {
 					body,
-					postTime: new Date().toISOString()
+					postTime: new Date().toISOString(),
+					likes: []
 				}
 				const { data } = await API.graphql({
 					query: createPost,

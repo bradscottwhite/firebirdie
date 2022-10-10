@@ -17,6 +17,7 @@ type User @model
 	bio: String
 	posts: [Post] @hasMany
 	comments: [Comment] @hasMany
+	postLikes: [PostLike] @hasMany
 # more fields ...
 }
 
@@ -36,6 +37,23 @@ type Post @model
 	postTime: AWSDateTime!
 	author: User @belongsTo
 	comments: [Comment] @hasMany
+	likes: [PostLike] @hasMany
+}
+
+type PostLike @model
+	@auth(rules: [
+		{ allow: owner, operations: [read, create, delete] },
+		{ allow: public, operations: [read] }
+	])
+{
+	id: ID!
+	owner: String
+		@auth(rules: [
+			{ allow: owner, operations: [read, delete] },
+			{ allow: public, operations: [read] }
+		])
+	postId: ID! @index(name: "byPostId", queryField: "listPostLikesByPostId")
+	post: Post @belongsTo
 }
 
 # make comments like posts???

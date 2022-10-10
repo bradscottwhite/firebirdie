@@ -6,7 +6,7 @@ import { listPosts } from './graphql/queries'
 
 import { Post } from './Post'
 
-export const Timeline = ({ posts, setPosts }) => {
+export const Timeline = ({ userData, posts, setPosts }) => {
 	useEffect(() => {
 		const fetchPosts = async () => {
 			try {
@@ -21,11 +21,11 @@ export const Timeline = ({ posts, setPosts }) => {
 		fetchPosts()
 		// Subscribe....!!!
 	}, [])
-	
+
 	return (
 		<div>
 			{posts.map(props => (
-				<Post {...props} />
+				<Post userData={userData} {...props} />
 			))}
 		</div>
 	)

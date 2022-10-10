@@ -9,7 +9,7 @@ export const Home = ({ userData }) => {
 	return (
 		<div>
 			<CreatePost posts={posts} setPosts={setPosts} userData={userData} />
-			<Timeline posts={posts} setPosts={setPosts} />
+			<Timeline posts={posts} setPosts={setPosts} userData={userData} />
 		</div>
 	)
 };

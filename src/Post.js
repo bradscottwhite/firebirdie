@@ -2,10 +2,20 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
-import { getUserByUsername } from './graphql/queries'
+import {
+	getUserByUsername,
+	listPostLikesByPostId
+} from './graphql/queries'
+import {
+	createPostLike,
+	deletePostLike
+} from './graphql/mutations'
 
-export const Post = ({ id, body, postTime, owner }) => {
+export const Post = ({ userData, id, body, postTime, owner }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})
+	
+	const [ likeId, setLikeId ] = useState(false)
+	const [ likes, setLikes ] = useState([])
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -20,7 +30,61 @@ export const Post = ({ id, body, postTime, owner }) => {
 			}
 		}
 		fetchUser()
+
+		const fetchPostLikes = async () => {
+			try {
+				const { data } = await API.graphql({
+					query: listPostLikesByPostId,
+					variables: { postId: id }
+				})
+				const valLikes = validateLikes(data.listPostLikesByPostId.items)
+				
+				for (let i in valLikes)
+					if (valLikes[i].owner === userData.username) {
+						setLikeId(valLikes[i].id)
+						return
+					}
+			} catch (err) {
+				console.log('error fetching post like data', err)
+			}
+		}
+
+		const validateLikes = /*async*/ likes => {
+			// make sure each like is valid by having one user for each one
+			setLikes(likes)
+			return likes
+		}
+		
+		fetchPostLikes()
 	}, [ owner ])
+
+	const handleLike = async () => {
+		try {
+			const { data } = await API.graphql({
+				query: createPostLike,
+				variables: { input: { postId: id } },
+				authMode: 'AMAZON_COGNITO_USER_POOLS'
+			})
+			
+			setLikeId(data.createPostLike.id)
+		} catch (err) {
+			console.log('error liking post', err)
+		}
+	}
+
+	const handleUnlike = async () => {
+		try {
+			await API.graphql({
+				query: deletePostLike,
+				variables: { input: { id: likeId } },
+				authMode: 'AMAZON_COGNITO_USER_POOLS'
+			})
+
+			setLikeId(false)
+		} catch (err) {
+			console.log('error unliking post', err)
+		}
+	}	
 
 	const time = postTime
 	//console.log(postTime)
@@ -40,7 +104,20 @@ export const Post = ({ id, body, postTime, owner }) => {
 			<Link to={`/${username}/${id}`}>
 				<p>{body}</p>
 				{/* likes, comments... */}
-			</Link>	
+			</Link>
+
+			<p>{likes !== [] ? `${likes.length} likes` : ''}</p>
+			{likeId ? (
+				<button
+					className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
+					onClick={handleUnlike}
+				>Unlike</button>
+			) : (
+				<button
+					className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
+					onClick={handleLike}
+				>Like</button>
+			)}
 		</div>
 	)
 };
