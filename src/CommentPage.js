@@ -2,18 +2,18 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
-import { getUserByUsername, getPost } from './graphql/queries'
+import { getUserByUsername, getComment } from './graphql/queries'
 
-import { CreateComment } from './CreateComment'
-import { CommentTimeline } from './CommentTimeline'
+//import { CreateComment } from './CreateComment'
+//import { CommentTimeline } from './CommentTimeline'
 
-export const PostPage = ({ userData }) => {
-	const { username, postId: id } = useParams()
+export const CommentPage = () => {
+	const { username, postId, commentId: id } = useParams()
 
-	const [ { body, postTime }, setPostData ] = useState({})
+	const [ { body, postTime }, setCommentData ] = useState({})
 	const [ { name, avatar }, setUserData ] = useState({})
 
-	const [ comments, setComments ] = useState([])
+	//const [ comments, setComments ] = useState([])
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -29,18 +29,18 @@ export const PostPage = ({ userData }) => {
 		}
 		fetchUser()
 
-		const fetchPost = async () => {
+		const fetchComment = async () => {
 			try {
 				const { data } = await API.graphql({
-					query: getPost,
+					query: getComment,
 					variables: { id }
 				})
-				setPostData(data.getPost)
+				setCommentData(data.getComment)
 			} catch (err) {
-				console.log('error fetching post data', err)
+				console.log('error fetching comment data', err)
 			}
 		}
-		fetchPost()
+		fetchComment()
 	}, [ username, id ])
 
 	const time = postTime
@@ -63,9 +63,9 @@ export const PostPage = ({ userData }) => {
 				{/* likes, comments... */}
 			</div>
 
-			<CreateComment userData={userData} postId={id} comments={comments} setComments={setComments} />
+			{/*<CreateComment comments={comments} setComments={setComments} userData={{ username, avatar, name }} />*/}
 
-			<CommentTimeline postId={id} comments={comments} setComments={setComments} />
+			{/*<CommentTimeline postId={id} comments={comments} setComments={setComments} />*/}
 		</div>
 	)
 };

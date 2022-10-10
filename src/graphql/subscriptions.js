@@ -9,6 +9,7 @@ export const onCreateUser = /* GraphQL */ `
       username
       name
       avatar
+      bio
       posts {
         items {
           id
@@ -27,6 +28,7 @@ export const onCreateUser = /* GraphQL */ `
           owner
           body
           postTime
+          postId
           createdAt
           updatedAt
           userCommentsId
@@ -47,6 +49,7 @@ export const onUpdateUser = /* GraphQL */ `
       username
       name
       avatar
+      bio
       posts {
         items {
           id
@@ -65,6 +68,7 @@ export const onUpdateUser = /* GraphQL */ `
           owner
           body
           postTime
+          postId
           createdAt
           updatedAt
           userCommentsId
@@ -85,6 +89,7 @@ export const onDeleteUser = /* GraphQL */ `
       username
       name
       avatar
+      bio
       posts {
         items {
           id
@@ -103,6 +108,7 @@ export const onDeleteUser = /* GraphQL */ `
           owner
           body
           postTime
+          postId
           createdAt
           updatedAt
           userCommentsId
@@ -128,6 +134,7 @@ export const onCreatePost = /* GraphQL */ `
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -143,6 +150,7 @@ export const onCreatePost = /* GraphQL */ `
           owner
           body
           postTime
+          postId
           createdAt
           updatedAt
           userCommentsId
@@ -169,6 +177,7 @@ export const onUpdatePost = /* GraphQL */ `
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -184,6 +193,7 @@ export const onUpdatePost = /* GraphQL */ `
           owner
           body
           postTime
+          postId
           createdAt
           updatedAt
           userCommentsId
@@ -210,6 +220,7 @@ export const onDeletePost = /* GraphQL */ `
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -225,6 +236,7 @@ export const onDeletePost = /* GraphQL */ `
           owner
           body
           postTime
+          postId
           createdAt
           updatedAt
           userCommentsId
@@ -245,12 +257,13 @@ export const onCreateComment = /* GraphQL */ `
       owner
       body
       postTime
-      user {
+      author {
         id
         owner
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -271,6 +284,7 @@ export const onCreateComment = /* GraphQL */ `
           username
           name
           avatar
+          bio
           createdAt
           updatedAt
         }
@@ -281,6 +295,7 @@ export const onCreateComment = /* GraphQL */ `
         updatedAt
         userPostsId
       }
+      postId
       createdAt
       updatedAt
       userCommentsId
@@ -295,12 +310,13 @@ export const onUpdateComment = /* GraphQL */ `
       owner
       body
       postTime
-      user {
+      author {
         id
         owner
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -321,6 +337,7 @@ export const onUpdateComment = /* GraphQL */ `
           username
           name
           avatar
+          bio
           createdAt
           updatedAt
         }
@@ -331,6 +348,7 @@ export const onUpdateComment = /* GraphQL */ `
         updatedAt
         userPostsId
       }
+      postId
       createdAt
       updatedAt
       userCommentsId
@@ -345,12 +363,13 @@ export const onDeleteComment = /* GraphQL */ `
       owner
       body
       postTime
-      user {
+      author {
         id
         owner
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -371,6 +390,7 @@ export const onDeleteComment = /* GraphQL */ `
           username
           name
           avatar
+          bio
           createdAt
           updatedAt
         }
@@ -381,6 +401,7 @@ export const onDeleteComment = /* GraphQL */ `
         updatedAt
         userPostsId
       }
+      postId
       createdAt
       updatedAt
       userCommentsId

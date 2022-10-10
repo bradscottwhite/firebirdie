@@ -7,7 +7,7 @@ import { getUserByUsername, listPosts } from './graphql/queries'
 import { Post } from './Post'
 
 export const User = () => {
-	const { username, id } = useParams()
+	const { username } = useParams()
 
 	const [ posts, setPosts ] = useState([])
 	const [ { name, avatar, owner }, setUserData ] = useState({})

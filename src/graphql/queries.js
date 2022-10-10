@@ -9,6 +9,7 @@ export const getUser = /* GraphQL */ `
       username
       name
       avatar
+      bio
       posts {
         items {
           id
@@ -27,6 +28,7 @@ export const getUser = /* GraphQL */ `
           owner
           body
           postTime
+          postId
           createdAt
           updatedAt
           userCommentsId
@@ -52,6 +54,7 @@ export const listUsers = /* GraphQL */ `
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -86,6 +89,7 @@ export const getUserByOwner = /* GraphQL */ `
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -120,6 +124,7 @@ export const getUserByUsername = /* GraphQL */ `
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -146,6 +151,7 @@ export const getPost = /* GraphQL */ `
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -161,6 +167,7 @@ export const getPost = /* GraphQL */ `
           owner
           body
           postTime
+          postId
           createdAt
           updatedAt
           userCommentsId
@@ -192,46 +199,7 @@ export const listPosts = /* GraphQL */ `
           username
           name
           avatar
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        userPostsId
-      }
-      nextToken
-    }
-  }
-`;
-export const listPostsByOwner = /* GraphQL */ `
-  query ListPostsByOwner(
-    $owner: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPostsByOwner(
-      owner: $owner
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        owner
-        body
-        postTime
-        author {
-          id
-          owner
-          username
-          name
-          avatar
+          bio
           createdAt
           updatedAt
         }
@@ -253,12 +221,13 @@ export const getComment = /* GraphQL */ `
       owner
       body
       postTime
-      user {
+      author {
         id
         owner
         username
         name
         avatar
+        bio
         posts {
           nextToken
         }
@@ -279,6 +248,7 @@ export const getComment = /* GraphQL */ `
           username
           name
           avatar
+          bio
           createdAt
           updatedAt
         }
@@ -289,6 +259,7 @@ export const getComment = /* GraphQL */ `
         updatedAt
         userPostsId
       }
+      postId
       createdAt
       updatedAt
       userCommentsId
@@ -308,12 +279,13 @@ export const listComments = /* GraphQL */ `
         owner
         body
         postTime
-        user {
+        author {
           id
           owner
           username
           name
           avatar
+          bio
           createdAt
           updatedAt
         }
@@ -326,6 +298,56 @@ export const listComments = /* GraphQL */ `
           updatedAt
           userPostsId
         }
+        postId
+        createdAt
+        updatedAt
+        userCommentsId
+        postCommentsId
+      }
+      nextToken
+    }
+  }
+`;
+export const listCommentsByPostId = /* GraphQL */ `
+  query ListCommentsByPostId(
+    $postId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCommentsByPostId(
+      postId: $postId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        post {
+          id
+          owner
+          body
+          postTime
+          createdAt
+          updatedAt
+          userPostsId
+        }
+        postId
         createdAt
         updatedAt
         userCommentsId

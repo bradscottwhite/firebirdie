@@ -19,7 +19,7 @@ export const Main = ({ children, signOut, username }) => {
 			{children}
 			
 			<div className='bg-purple-600 p-10'>
-				<h2>Nav</h2>
+				<h2>Firebirdie 🔥🐦 - Nav</h2>
 				
 				{routes.map(({ path, name }) => (
 					<Link to={path}>{name}</Link>

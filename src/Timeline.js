@@ -6,9 +6,7 @@ import { listPosts } from './graphql/queries'
 
 import { Post } from './Post'
 
-export const Timeline = () => {
-	const [ posts, setPosts ] = useState([])
-
+export const Timeline = ({ posts, setPosts }) => {
 	useEffect(() => {
 		const fetchPosts = async () => {
 			try {

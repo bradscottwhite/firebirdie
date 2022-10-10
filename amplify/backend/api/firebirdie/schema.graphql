@@ -46,9 +46,15 @@ type Comment @model
 	])
 {
 	id: ID!
-	owner: String @auth(rules: [{ allow: owner, operations: [read, delete] }])
+	owner: String
+		@auth(rules: [
+			{ allow: owner, operations: [read, delete] },
+			{ allow: public, operations: [read] }
+		])
 	body: String!
 	postTime: AWSDateTime!
-	user: User! @belongsTo
-	post: Post! @belongsTo
+	author: User @belongsTo
+	post: Post @belongsTo
+	postId: ID! @index(name: "byPostId", queryField: "listCommentsByPostId")
 }
+ 
