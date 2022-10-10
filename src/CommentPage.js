@@ -3,11 +3,12 @@ import { useParams, Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
 import { getUserByUsername, getComment } from './graphql/queries'
+import { deleteComment } from './graphql/mutations'
 
 //import { CreateComment } from './CreateComment'
 //import { CommentTimeline } from './CommentTimeline'
 
-export const CommentPage = () => {
+export const CommentPage = ({ userData }) => {
 	const { username, postId, commentId: id } = useParams()
 
 	const [ { body, postTime }, setCommentData ] = useState({})
@@ -43,6 +44,18 @@ export const CommentPage = () => {
 		fetchComment()
 	}, [ username, id ])
 
+	const handleDelete = async () => {
+		try {
+			API.graphql({
+				query: deleteComment,
+				variables: { input: { id } },
+				authMode: 'AMAZON_COGNITO_USER_POOLS'
+			})
+		} catch (err) {
+			console.log('error deleting comment', err)
+		}
+	}
+
 	const time = postTime
 	//console.log(postTime)
 
@@ -61,6 +74,15 @@ export const CommentPage = () => {
 				
 				<p>{body}</p>
 				{/* likes, comments... */}
+				
+				{(userData.username === username) && (
+					<Link to='/'>
+						<button
+							className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
+							onClick={handleDelete}
+						>Delete</button>
+					</Link>
+				)}
 			</div>
 
 			{/*<CreateComment comments={comments} setComments={setComments} userData={{ username, avatar, name }} />*/}
