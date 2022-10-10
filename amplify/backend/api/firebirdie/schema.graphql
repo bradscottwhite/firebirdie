@@ -74,5 +74,22 @@ type Comment @model
 	author: User @belongsTo
 	post: Post @belongsTo
 	postId: ID! @index(name: "byPostId", queryField: "listCommentsByPostId")
+	likes: [CommentLike] @hasMany
+}
+
+type CommentLike @model
+	@auth(rules: [
+		{ allow: owner, operations: [read, create, delete] },
+		{ allow: public, operations: [read] }
+	])
+{
+	id: ID!
+	owner: String
+		@auth(rules: [
+			{ allow: owner, operations: [read, delete] },
+			{ allow: public, operations: [read] }
+		])
+	commentId: ID! @index(name: "byCommentId", queryField: "listCommentLikesByCommentId")
+	comment: Comment @belongsTo
 }
  

@@ -42,6 +42,54 @@ export const updatePostLike = /* GraphQL */ `
     }
   }
 `;
+export const updateCommentLike = /* GraphQL */ `
+  mutation UpdateCommentLike(
+    $input: UpdateCommentLikeInput!
+    $condition: ModelCommentLikeConditionInput
+  ) {
+    updateCommentLike(input: $input, condition: $condition) {
+      id
+      owner
+      commentId
+      comment {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        post {
+          id
+          owner
+          body
+          postTime
+          createdAt
+          updatedAt
+          userPostsId
+        }
+        postId
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userCommentsId
+        postCommentsId
+      }
+      createdAt
+      updatedAt
+      commentLikesId
+    }
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
@@ -527,6 +575,17 @@ export const createComment = /* GraphQL */ `
         userPostsId
       }
       postId
+      likes {
+        items {
+          id
+          owner
+          commentId
+          createdAt
+          updatedAt
+          commentLikesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       userCommentsId
@@ -589,6 +648,17 @@ export const updateComment = /* GraphQL */ `
         userPostsId
       }
       postId
+      likes {
+        items {
+          id
+          owner
+          commentId
+          createdAt
+          updatedAt
+          commentLikesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       userCommentsId
@@ -651,10 +721,117 @@ export const deleteComment = /* GraphQL */ `
         userPostsId
       }
       postId
+      likes {
+        items {
+          id
+          owner
+          commentId
+          createdAt
+          updatedAt
+          commentLikesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       userCommentsId
       postCommentsId
+    }
+  }
+`;
+export const createCommentLike = /* GraphQL */ `
+  mutation CreateCommentLike(
+    $input: CreateCommentLikeInput!
+    $condition: ModelCommentLikeConditionInput
+  ) {
+    createCommentLike(input: $input, condition: $condition) {
+      id
+      owner
+      commentId
+      comment {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        post {
+          id
+          owner
+          body
+          postTime
+          createdAt
+          updatedAt
+          userPostsId
+        }
+        postId
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userCommentsId
+        postCommentsId
+      }
+      createdAt
+      updatedAt
+      commentLikesId
+    }
+  }
+`;
+export const deleteCommentLike = /* GraphQL */ `
+  mutation DeleteCommentLike(
+    $input: DeleteCommentLikeInput!
+    $condition: ModelCommentLikeConditionInput
+  ) {
+    deleteCommentLike(input: $input, condition: $condition) {
+      id
+      owner
+      commentId
+      comment {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        post {
+          id
+          owner
+          body
+          postTime
+          createdAt
+          updatedAt
+          userPostsId
+        }
+        postId
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userCommentsId
+        postCommentsId
+      }
+      createdAt
+      updatedAt
+      commentLikesId
     }
   }
 `;

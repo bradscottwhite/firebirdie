@@ -166,7 +166,7 @@ export const Post = ({ userData }) => {
 
 			<CreateComment userData={userData} postId={id} comments={comments} setComments={setComments} />
 
-			<Timeline postId={id} comments={comments} setComments={setComments} />
+			<Timeline userData={userData} postId={id} comments={comments} setComments={setComments} />
 		</div>
 	)
 };

@@ -497,6 +497,17 @@ export const onCreateComment = /* GraphQL */ `
         userPostsId
       }
       postId
+      likes {
+        items {
+          id
+          owner
+          commentId
+          createdAt
+          updatedAt
+          commentLikesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       userCommentsId
@@ -556,6 +567,17 @@ export const onUpdateComment = /* GraphQL */ `
         userPostsId
       }
       postId
+      likes {
+        items {
+          id
+          owner
+          commentId
+          createdAt
+          updatedAt
+          commentLikesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       userCommentsId
@@ -615,10 +637,156 @@ export const onDeleteComment = /* GraphQL */ `
         userPostsId
       }
       postId
+      likes {
+        items {
+          id
+          owner
+          commentId
+          createdAt
+          updatedAt
+          commentLikesId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
       userCommentsId
       postCommentsId
+    }
+  }
+`;
+export const onCreateCommentLike = /* GraphQL */ `
+  subscription OnCreateCommentLike($owner: String) {
+    onCreateCommentLike(owner: $owner) {
+      id
+      owner
+      commentId
+      comment {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        post {
+          id
+          owner
+          body
+          postTime
+          createdAt
+          updatedAt
+          userPostsId
+        }
+        postId
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userCommentsId
+        postCommentsId
+      }
+      createdAt
+      updatedAt
+      commentLikesId
+    }
+  }
+`;
+export const onUpdateCommentLike = /* GraphQL */ `
+  subscription OnUpdateCommentLike($owner: String) {
+    onUpdateCommentLike(owner: $owner) {
+      id
+      owner
+      commentId
+      comment {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        post {
+          id
+          owner
+          body
+          postTime
+          createdAt
+          updatedAt
+          userPostsId
+        }
+        postId
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userCommentsId
+        postCommentsId
+      }
+      createdAt
+      updatedAt
+      commentLikesId
+    }
+  }
+`;
+export const onDeleteCommentLike = /* GraphQL */ `
+  subscription OnDeleteCommentLike($owner: String) {
+    onDeleteCommentLike(owner: $owner) {
+      id
+      owner
+      commentId
+      comment {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        post {
+          id
+          owner
+          body
+          postTime
+          createdAt
+          updatedAt
+          userPostsId
+        }
+        postId
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userCommentsId
+        postCommentsId
+      }
+      createdAt
+      updatedAt
+      commentLikesId
     }
   }
 `;

@@ -75,7 +75,8 @@ export const Post = ({ userData, id, body, postTime, owner }) => {
 				variables: { input: { postId: id } },
 				authMode: 'AMAZON_COGNITO_USER_POOLS'
 			})
-			
+
+			setLikes([ ...likes, data.createPostLike ])
 			setLikeId(data.createPostLike.id)
 		} catch (err) {
 			console.log('error liking post', err)
@@ -90,6 +91,7 @@ export const Post = ({ userData, id, body, postTime, owner }) => {
 				authMode: 'AMAZON_COGNITO_USER_POOLS'
 			})
 
+			setLikes(likes.filter(id => id === likeId))
 			setLikeId(false)
 		} catch (err) {
 			console.log('error unliking post', err)

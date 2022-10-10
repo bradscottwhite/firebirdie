@@ -5,7 +5,7 @@ import { listCommentsByPostId } from '../../../graphql/queries'
 
 import { Comment } from './Comment'
 
-export const Timeline = ({ postId, comments, setComments }) => {
+export const Timeline = ({ userData, postId, comments, setComments }) => {
 	useEffect(() => {
 		const fetchComments = async () => {
 			try {
@@ -25,7 +25,7 @@ export const Timeline = ({ postId, comments, setComments }) => {
 	return (
 		<div>
 			{comments.map(props => (
-				<Comment {...props} />
+				<Comment userData={userData} {...props} />
 			))}
 		</div>
 	)
