@@ -10,7 +10,7 @@ import { API } from 'aws-amplify'
 import { getUserByUsername } from './graphql/queries'
 
 import { Main } from './Main'
-import { CreateUser } from './CreateUser'
+import { CreateUser } from './comps/base/jsx/CreateUser'
 
 const App = () => {
 	return (

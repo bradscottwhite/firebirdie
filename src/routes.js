@@ -1,8 +1,8 @@
-import { Home } from './Home'
-import { Settings } from './Settings'
-import { User } from './User'
-import { PostPage } from './PostPage'
-import { CommentPage } from './CommentPage'
+import { Home } from './pages/Home'
+import { Settings } from './pages/Settings'
+import { User } from './pages/User'
+import { Post } from './pages/Post'
+import { Comment } from './pages/Comment'
 
 export const routes = [
 	{
@@ -16,9 +16,9 @@ export const routes = [
 		El: User
 	}, {
 		path: '/:username/:postId',
-		El: PostPage,
+		El: Post
 	}, {
 		path: '/:username/:postId/:commentId',
-		El: CommentPage,
+		El: Comment
 	}
 ];

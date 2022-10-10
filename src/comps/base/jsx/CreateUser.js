@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { API } from 'aws-amplify'
-import { createUser } from './graphql/mutations'
+import { createUser } from '../../../graphql/mutations'
 
 export const CreateUser = ({ username, setUserData }) => {
 	const [ name, setName ] = useState('')

@@ -2,19 +2,19 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
-import { getUserByUsername, getPost } from './graphql/queries'
-import { deletePost } from './graphql/mutations'
+import { getUserByUsername, getComment } from '../graphql/queries'
+import { deleteComment } from '../graphql/mutations'
 
-import { CreateComment } from './CreateComment'
-import { CommentTimeline } from './CommentTimeline'
+//import { CreateComment } from './CreateComment'
+//import { CommentTimeline } from './CommentTimeline'
 
-export const PostPage = ({ userData }) => {
-	const { username, postId: id } = useParams()
+export const Comment = ({ userData }) => {
+	const { username, postId, commentId: id } = useParams()
 
-	const [ { body, postTime }, setPostData ] = useState({})
+	const [ { body, postTime }, setCommentData ] = useState({})
 	const [ { name, avatar }, setUserData ] = useState({})
 
-	const [ comments, setComments ] = useState([])
+	//const [ comments, setComments ] = useState([])
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -30,29 +30,29 @@ export const PostPage = ({ userData }) => {
 		}
 		fetchUser()
 
-		const fetchPost = async () => {
+		const fetchComment = async () => {
 			try {
 				const { data } = await API.graphql({
-					query: getPost,
+					query: getComment,
 					variables: { id }
 				})
-				setPostData(data.getPost)
+				setCommentData(data.getComment)
 			} catch (err) {
-				console.log('error fetching post data', err)
+				console.log('error fetching comment data', err)
 			}
 		}
-		fetchPost()
+		fetchComment()
 	}, [ username, id ])
 
 	const handleDelete = async () => {
 		try {
 			API.graphql({
-				query: deletePost,
+				query: deleteComment,
 				variables: { input: { id } },
 				authMode: 'AMAZON_COGNITO_USER_POOLS'
 			})
 		} catch (err) {
-			console.log('error deleting post', err)
+			console.log('error deleting comment', err)
 		}
 	}
 
@@ -74,7 +74,7 @@ export const PostPage = ({ userData }) => {
 				
 				<p>{body}</p>
 				{/* likes, comments... */}
-					
+				
 				{(userData.username === username) && (
 					<Link to='/'>
 						<button
@@ -85,9 +85,9 @@ export const PostPage = ({ userData }) => {
 				)}
 			</div>
 
-			<CreateComment userData={userData} postId={id} comments={comments} setComments={setComments} />
+			{/*<CreateComment comments={comments} setComments={setComments} userData={{ username, avatar, name }} />*/}
 
-			<CommentTimeline postId={id} comments={comments} setComments={setComments} />
+			{/*<CommentTimeline postId={id} comments={comments} setComments={setComments} />*/}
 		</div>
 	)
 };

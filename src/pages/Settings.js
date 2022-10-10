@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
-import { updateUser } from './graphql/mutations'
+import { updateUser } from '../graphql/mutations'
 
 export const Settings  = ({ userData: { id, username, name, avatar }, setUserData }) => {
 	const [ newName, setName ] = useState(name)

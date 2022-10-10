@@ -1,30 +1,30 @@
 import { useState } from 'react'
 
 import { API } from 'aws-amplify'
-import { createComment } from './graphql/mutations'
+import { createPost } from '../../../graphql/mutations'
 
-export const CreateComment = ({ userData, postId, comments, setComments }) => {
+export const CreatePost = ({ posts, setPosts, userData }) => {
 	const { username, avatar, name } = userData
 
 	const [ body, setBody ] = useState('')
-
-	const handleComment = async () => {
+	
+	const handlePost = async () => {
 		if (body !== '')
 			try {
 				const input = {
 					body,
 					postTime: new Date().toISOString(),
-					postId
+					likes: []
 				}
 				const { data } = await API.graphql({
-					query: createComment,
+					query: createPost,
 					variables: { input },
 					authMode: 'AMAZON_COGNITO_USER_POOLS'
 				})
-				setComments([ data.createComment, ...comments ])
+				setPosts([ data.createPost, ...posts ])
 				setBody('')
 			} catch (err) {
-				console.log('error creating comment', err)
+				console.log('error creating post', err)
 			}
 	}
 
@@ -39,13 +39,13 @@ export const CreateComment = ({ userData, postId, comments, setComments }) => {
 			
 			<textarea
 				value={body}
-				placeholder='Enter comment...'
+				placeholder='Enter post...'
 				onChange={e => setBody(e.target.value)}
 			></textarea>
 			
 			<button
 				className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-				onClick={handleComment}
+				onClick={handlePost}
 			>Post</button>
 		</div>
 	)

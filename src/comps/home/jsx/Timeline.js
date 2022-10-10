@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 
 import { API } from 'aws-amplify'
 // Later only fetch posts from users who they are following
-import { listPosts } from './graphql/queries'
+import { listPosts } from '../../../graphql/queries'
 
-import { Post } from './Post'
+import { Post } from '../../base/jsx/Post'
 
 export const Timeline = ({ userData, posts, setPosts }) => {
 	useEffect(() => {

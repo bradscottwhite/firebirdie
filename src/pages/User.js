@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
-import { getUserByUsername, listPosts } from './graphql/queries'
+import { getUserByUsername, listPosts } from '../graphql/queries'
 
-import { Post } from './Post'
+import { Post } from '../comps/base/jsx/Post'
 
 export const User = ({ userData }) => {
 	const { username } = useParams()

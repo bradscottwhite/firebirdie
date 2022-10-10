@@ -5,11 +5,11 @@ import { API } from 'aws-amplify'
 import {
 	getUserByUsername,
 	listPostLikesByPostId
-} from './graphql/queries'
+} from '../../../graphql/queries'
 import {
 	createPostLike,
 	deletePostLike
-} from './graphql/mutations'
+} from '../../../graphql/mutations'
 
 export const Post = ({ userData, id, body, postTime, owner }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})

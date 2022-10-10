@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
-import { getUserByUsername } from './graphql/queries'
+import { getUserByUsername } from '../../../graphql/queries'
 
 export const Comment = ({ postId, id, body, postTime, owner }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})

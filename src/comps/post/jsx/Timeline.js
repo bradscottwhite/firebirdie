@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
 import { API } from 'aws-amplify'
-import { listCommentsByPostId } from './graphql/queries'
+import { listCommentsByPostId } from '../../../graphql/queries'
 
 import { Comment } from './Comment'
 
-export const CommentTimeline = ({ postId, comments, setComments }) => {
+export const Timeline = ({ postId, comments, setComments }) => {
 	useEffect(() => {
 		const fetchComments = async () => {
 			try {
