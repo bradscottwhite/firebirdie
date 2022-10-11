@@ -48,6 +48,17 @@ export const onCreateUser = /* GraphQL */ `
         }
         nextToken
       }
+      following {
+        items {
+          id
+          owner
+          followingId
+          createdAt
+          updatedAt
+          userFollowingId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -97,6 +108,17 @@ export const onUpdateUser = /* GraphQL */ `
           updatedAt
           userPostLikesId
           postLikesId
+        }
+        nextToken
+      }
+      following {
+        items {
+          id
+          owner
+          followingId
+          createdAt
+          updatedAt
+          userFollowingId
         }
         nextToken
       }
@@ -152,8 +174,121 @@ export const onDeleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      following {
+        items {
+          id
+          owner
+          followingId
+          createdAt
+          updatedAt
+          userFollowingId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const onCreateFollowing = /* GraphQL */ `
+  subscription OnCreateFollowing($owner: String) {
+    onCreateFollowing(owner: $owner) {
+      id
+      owner
+      user {
+        id
+        owner
+        username
+        name
+        avatar
+        bio
+        posts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        postLikes {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      followingId
+      createdAt
+      updatedAt
+      userFollowingId
+    }
+  }
+`;
+export const onUpdateFollowing = /* GraphQL */ `
+  subscription OnUpdateFollowing($owner: String) {
+    onUpdateFollowing(owner: $owner) {
+      id
+      owner
+      user {
+        id
+        owner
+        username
+        name
+        avatar
+        bio
+        posts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        postLikes {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      followingId
+      createdAt
+      updatedAt
+      userFollowingId
+    }
+  }
+`;
+export const onDeleteFollowing = /* GraphQL */ `
+  subscription OnDeleteFollowing($owner: String) {
+    onDeleteFollowing(owner: $owner) {
+      id
+      owner
+      user {
+        id
+        owner
+        username
+        name
+        avatar
+        bio
+        posts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        postLikes {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      followingId
+      createdAt
+      updatedAt
+      userFollowingId
     }
   }
 `;
@@ -178,6 +313,9 @@ export const onCreatePost = /* GraphQL */ `
           nextToken
         }
         postLikes {
+          nextToken
+        }
+        following {
           nextToken
         }
         createdAt
@@ -238,6 +376,9 @@ export const onUpdatePost = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        following {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -294,6 +435,9 @@ export const onDeletePost = /* GraphQL */ `
           nextToken
         }
         postLikes {
+          nextToken
+        }
+        following {
           nextToken
         }
         createdAt
@@ -468,6 +612,9 @@ export const onCreateComment = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        following {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -538,6 +685,9 @@ export const onUpdateComment = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        following {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -606,6 +756,9 @@ export const onDeleteComment = /* GraphQL */ `
           nextToken
         }
         postLikes {
+          nextToken
+        }
+        following {
           nextToken
         }
         createdAt

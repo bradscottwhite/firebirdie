@@ -48,6 +48,17 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
+      following {
+        items {
+          id
+          owner
+          followingId
+          createdAt
+          updatedAt
+          userFollowingId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -74,6 +85,9 @@ export const listUsers = /* GraphQL */ `
           nextToken
         }
         postLikes {
+          nextToken
+        }
+        following {
           nextToken
         }
         createdAt
@@ -114,6 +128,9 @@ export const getUserByOwner = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        following {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -152,8 +169,111 @@ export const getUserByUsername = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        following {
+          nextToken
+        }
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getFollowing = /* GraphQL */ `
+  query GetFollowing($id: ID!) {
+    getFollowing(id: $id) {
+      id
+      owner
+      user {
+        id
+        owner
+        username
+        name
+        avatar
+        bio
+        posts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        postLikes {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      followingId
+      createdAt
+      updatedAt
+      userFollowingId
+    }
+  }
+`;
+export const listFollowings = /* GraphQL */ `
+  query ListFollowings(
+    $filter: ModelFollowingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFollowings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        owner
+        user {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        followingId
+        createdAt
+        updatedAt
+        userFollowingId
+      }
+      nextToken
+    }
+  }
+`;
+export const listFollowingByFollowingId = /* GraphQL */ `
+  query ListFollowingByFollowingId(
+    $followingId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelFollowingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFollowingByFollowingId(
+      followingId: $followingId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        owner
+        user {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        followingId
+        createdAt
+        updatedAt
+        userFollowingId
       }
       nextToken
     }
@@ -180,6 +300,9 @@ export const getPost = /* GraphQL */ `
           nextToken
         }
         postLikes {
+          nextToken
+        }
+        following {
           nextToken
         }
         createdAt
@@ -378,6 +501,9 @@ export const getComment = /* GraphQL */ `
           nextToken
         }
         postLikes {
+          nextToken
+        }
+        following {
           nextToken
         }
         createdAt

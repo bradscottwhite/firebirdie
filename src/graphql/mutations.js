@@ -1,6 +1,43 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const updateFollowing = /* GraphQL */ `
+  mutation UpdateFollowing(
+    $input: UpdateFollowingInput!
+    $condition: ModelFollowingConditionInput
+  ) {
+    updateFollowing(input: $input, condition: $condition) {
+      id
+      owner
+      user {
+        id
+        owner
+        username
+        name
+        avatar
+        bio
+        posts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        postLikes {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      followingId
+      createdAt
+      updatedAt
+      userFollowingId
+    }
+  }
+`;
 export const updatePostLike = /* GraphQL */ `
   mutation UpdatePostLike(
     $input: UpdatePostLikeInput!
@@ -140,6 +177,17 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
+      following {
+        items {
+          id
+          owner
+          followingId
+          createdAt
+          updatedAt
+          userFollowingId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -192,6 +240,17 @@ export const updateUser = /* GraphQL */ `
           updatedAt
           userPostLikesId
           postLikesId
+        }
+        nextToken
+      }
+      following {
+        items {
+          id
+          owner
+          followingId
+          createdAt
+          updatedAt
+          userFollowingId
         }
         nextToken
       }
@@ -250,8 +309,93 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      following {
+        items {
+          id
+          owner
+          followingId
+          createdAt
+          updatedAt
+          userFollowingId
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const createFollowing = /* GraphQL */ `
+  mutation CreateFollowing(
+    $input: CreateFollowingInput!
+    $condition: ModelFollowingConditionInput
+  ) {
+    createFollowing(input: $input, condition: $condition) {
+      id
+      owner
+      user {
+        id
+        owner
+        username
+        name
+        avatar
+        bio
+        posts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        postLikes {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      followingId
+      createdAt
+      updatedAt
+      userFollowingId
+    }
+  }
+`;
+export const deleteFollowing = /* GraphQL */ `
+  mutation DeleteFollowing(
+    $input: DeleteFollowingInput!
+    $condition: ModelFollowingConditionInput
+  ) {
+    deleteFollowing(input: $input, condition: $condition) {
+      id
+      owner
+      user {
+        id
+        owner
+        username
+        name
+        avatar
+        bio
+        posts {
+          nextToken
+        }
+        comments {
+          nextToken
+        }
+        postLikes {
+          nextToken
+        }
+        following {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      followingId
+      createdAt
+      updatedAt
+      userFollowingId
     }
   }
 `;
@@ -279,6 +423,9 @@ export const createPost = /* GraphQL */ `
           nextToken
         }
         postLikes {
+          nextToken
+        }
+        following {
           nextToken
         }
         createdAt
@@ -342,6 +489,9 @@ export const updatePost = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        following {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -401,6 +551,9 @@ export const deletePost = /* GraphQL */ `
           nextToken
         }
         postLikes {
+          nextToken
+        }
+        following {
           nextToken
         }
         createdAt
@@ -546,6 +699,9 @@ export const createComment = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        following {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -619,6 +775,9 @@ export const updateComment = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        following {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -690,6 +849,9 @@ export const deleteComment = /* GraphQL */ `
           nextToken
         }
         postLikes {
+          nextToken
+        }
+        following {
           nextToken
         }
         createdAt

@@ -19,7 +19,28 @@ type User @model
 	comments: [Comment] @hasMany
 	postLikes: [PostLike] @hasMany
 # more fields ...
+	following: [Following] @hasMany
+	#followers?
 }
+
+type Following @model
+	@auth(rules: [
+		{ allow: owner, operations: [read, create, delete] },
+		{ allow: public, operations: [read] }
+	])
+{
+	id: ID!
+	owner: String
+		@auth(rules: [
+			{ allow: owner, operations: [read, delete] },
+			{ allow: public, operations: [read] }
+		])
+	user: User @belongsTo
+	
+	# Id of person following:
+	followingId: ID! @index(name: "byFollowingId", queryField: "listFollowingByFollowingId")
+}
+
 
 type Post @model
 	@auth(rules: [
@@ -92,4 +113,5 @@ type CommentLike @model
 	commentId: ID! @index(name: "byCommentId", queryField: "listCommentLikesByCommentId")
 	comment: Comment @belongsTo
 }
+ 
  
