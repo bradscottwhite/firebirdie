@@ -16,6 +16,7 @@ export const onCreateUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -52,7 +53,8 @@ export const onCreateUser = /* GraphQL */ `
         items {
           id
           owner
-          followingId
+          userId
+          followId
           createdAt
           updatedAt
           userFollowingId
@@ -79,6 +81,7 @@ export const onUpdateUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -115,7 +118,8 @@ export const onUpdateUser = /* GraphQL */ `
         items {
           id
           owner
-          followingId
+          userId
+          followId
           createdAt
           updatedAt
           userFollowingId
@@ -142,6 +146,7 @@ export const onDeleteUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -178,7 +183,8 @@ export const onDeleteUser = /* GraphQL */ `
         items {
           id
           owner
-          followingId
+          userId
+          followId
           createdAt
           updatedAt
           userFollowingId
@@ -190,9 +196,9 @@ export const onDeleteUser = /* GraphQL */ `
     }
   }
 `;
-export const onCreateFollowing = /* GraphQL */ `
-  subscription OnCreateFollowing($owner: String) {
-    onCreateFollowing(owner: $owner) {
+export const onCreateFollow = /* GraphQL */ `
+  subscription OnCreateFollow($owner: String) {
+    onCreateFollow(owner: $owner) {
       id
       owner
       user {
@@ -217,16 +223,17 @@ export const onCreateFollowing = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      followingId
+      userId
+      followId
       createdAt
       updatedAt
       userFollowingId
     }
   }
 `;
-export const onUpdateFollowing = /* GraphQL */ `
-  subscription OnUpdateFollowing($owner: String) {
-    onUpdateFollowing(owner: $owner) {
+export const onUpdateFollow = /* GraphQL */ `
+  subscription OnUpdateFollow($owner: String) {
+    onUpdateFollow(owner: $owner) {
       id
       owner
       user {
@@ -251,16 +258,17 @@ export const onUpdateFollowing = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      followingId
+      userId
+      followId
       createdAt
       updatedAt
       userFollowingId
     }
   }
 `;
-export const onDeleteFollowing = /* GraphQL */ `
-  subscription OnDeleteFollowing($owner: String) {
-    onDeleteFollowing(owner: $owner) {
+export const onDeleteFollow = /* GraphQL */ `
+  subscription OnDeleteFollow($owner: String) {
+    onDeleteFollow(owner: $owner) {
       id
       owner
       user {
@@ -285,7 +293,8 @@ export const onDeleteFollowing = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      followingId
+      userId
+      followId
       createdAt
       updatedAt
       userFollowingId
@@ -321,6 +330,7 @@ export const onCreatePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      authorId
       comments {
         items {
           id
@@ -382,6 +392,7 @@ export const onUpdatePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      authorId
       comments {
         items {
           id
@@ -443,6 +454,7 @@ export const onDeletePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      authorId
       comments {
         items {
           id
@@ -496,6 +508,7 @@ export const onCreatePostLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -534,6 +547,7 @@ export const onUpdatePostLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -572,6 +586,7 @@ export const onDeletePostLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -633,6 +648,7 @@ export const onCreateComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -706,6 +722,7 @@ export const onUpdateComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -779,6 +796,7 @@ export const onDeleteComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -834,6 +852,7 @@ export const onCreateCommentLike = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -879,6 +898,7 @@ export const onUpdateCommentLike = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -924,6 +944,7 @@ export const onDeleteCommentLike = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId

@@ -16,6 +16,7 @@ export const getUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -52,7 +53,8 @@ export const getUser = /* GraphQL */ `
         items {
           id
           owner
-          followingId
+          userId
+          followId
           createdAt
           updatedAt
           userFollowingId
@@ -71,47 +73,6 @@ export const listUsers = /* GraphQL */ `
     $nextToken: String
   ) {
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        owner
-        username
-        name
-        avatar
-        bio
-        posts {
-          nextToken
-        }
-        comments {
-          nextToken
-        }
-        postLikes {
-          nextToken
-        }
-        following {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getUserByOwner = /* GraphQL */ `
-  query GetUserByOwner(
-    $owner: String!
-    $sortDirection: ModelSortDirection
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    getUserByOwner(
-      owner: $owner
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
       items {
         id
         owner
@@ -179,9 +140,9 @@ export const getUserByUsername = /* GraphQL */ `
     }
   }
 `;
-export const getFollowing = /* GraphQL */ `
-  query GetFollowing($id: ID!) {
-    getFollowing(id: $id) {
+export const getFollow = /* GraphQL */ `
+  query GetFollow($id: ID!) {
+    getFollow(id: $id) {
       id
       owner
       user {
@@ -206,20 +167,21 @@ export const getFollowing = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      followingId
+      userId
+      followId
       createdAt
       updatedAt
       userFollowingId
     }
   }
 `;
-export const listFollowings = /* GraphQL */ `
-  query ListFollowings(
-    $filter: ModelFollowingFilterInput
+export const listFollows = /* GraphQL */ `
+  query ListFollows(
+    $filter: ModelFollowFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listFollowings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listFollows(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         owner
@@ -233,7 +195,8 @@ export const listFollowings = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        followingId
+        userId
+        followId
         createdAt
         updatedAt
         userFollowingId
@@ -242,16 +205,16 @@ export const listFollowings = /* GraphQL */ `
     }
   }
 `;
-export const listFollowingByFollowingId = /* GraphQL */ `
-  query ListFollowingByFollowingId(
-    $followingId: ID!
+export const listFollowsByUserId = /* GraphQL */ `
+  query ListFollowsByUserId(
+    $userId: String!
     $sortDirection: ModelSortDirection
-    $filter: ModelFollowingFilterInput
+    $filter: ModelFollowFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listFollowingByFollowingId(
-      followingId: $followingId
+    listFollowsByUserId(
+      userId: $userId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -270,7 +233,46 @@ export const listFollowingByFollowingId = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        followingId
+        userId
+        followId
+        createdAt
+        updatedAt
+        userFollowingId
+      }
+      nextToken
+    }
+  }
+`;
+export const listFollowsByFollowId = /* GraphQL */ `
+  query ListFollowsByFollowId(
+    $followId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelFollowFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFollowsByFollowId(
+      followId: $followId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        owner
+        user {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        userId
+        followId
         createdAt
         updatedAt
         userFollowingId
@@ -308,6 +310,7 @@ export const getPost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      authorId
       comments {
         items {
           id
@@ -362,6 +365,52 @@ export const listPosts = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
+        comments {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userPostsId
+      }
+      nextToken
+    }
+  }
+`;
+export const listPostsByAuthorId = /* GraphQL */ `
+  query ListPostsByAuthorId(
+    $authorId: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPostsByAuthorId(
+      authorId: $authorId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          createdAt
+          updatedAt
+        }
+        authorId
         comments {
           nextToken
         }
@@ -397,6 +446,7 @@ export const getPostLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -430,6 +480,7 @@ export const listPostLikes = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -467,6 +518,7 @@ export const listPostLikesByPostId = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -524,6 +576,7 @@ export const getComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -580,6 +633,7 @@ export const listComments = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -632,6 +686,7 @@ export const listCommentsByPostId = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -675,6 +730,7 @@ export const getCommentLike = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId

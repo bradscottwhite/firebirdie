@@ -79,7 +79,7 @@ export const Post = ({ userData }) => {
 		}
 		
 		fetchPostLikes()
-	}, [ username, id ])
+	}, [ username, id, userData.username ])
 	
 	const handleLike = async () => {
 		try {

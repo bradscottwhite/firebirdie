@@ -10,7 +10,6 @@ type User @model
 			{ allow: owner, operations: [read, delete] },
 			{ allow: public, operations: [read] }
 		])
-		@index(name: "byOwner", queryField: "getUserByOwner")
 	username: String! @index(name: "byUsername", queryField: "getUserByUsername")
 	name: String!
 	avatar: String!
@@ -19,11 +18,11 @@ type User @model
 	comments: [Comment] @hasMany
 	postLikes: [PostLike] @hasMany
 # more fields ...
-	following: [Following] @hasMany
+	following: [Follow] @hasMany
 	#followers?
 }
 
-type Following @model
+type Follow @model
 	@auth(rules: [
 		{ allow: owner, operations: [read, create, delete] },
 		{ allow: public, operations: [read] }
@@ -36,9 +35,10 @@ type Following @model
 			{ allow: public, operations: [read] }
 		])
 	user: User @belongsTo
+	userId: String! @index(name: "byUserId", queryField: "listFollowsByUserId")
 	
 	# Id of person following:
-	followingId: ID! @index(name: "byFollowingId", queryField: "listFollowingByFollowingId")
+	followId: ID! @index(name: "byFollowId", queryField: "listFollowsByFollowId")
 }
 
 
@@ -54,9 +54,11 @@ type Post @model
 			{ allow: owner, operations: [read, delete] },
 			{ allow: public, operations: [read] }
 		])
+		#@index(name: "byOwner", queryField: "listPostsByOwner")
 	body: String!
 	postTime: AWSDateTime!
 	author: User @belongsTo
+	authorId: String! @index(name: "byAuthorId", queryField: "listPostsByAuthorId")
 	comments: [Comment] @hasMany
 	likes: [PostLike] @hasMany
 }
@@ -114,4 +116,4 @@ type CommentLike @model
 	comment: Comment @belongsTo
 }
  
- 
+         

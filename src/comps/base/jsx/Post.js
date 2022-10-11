@@ -14,7 +14,7 @@ import {
 import { Avatar, Username } from '../styles/userStyles'
 import { PostBase } from '../styles/postStyles'
 
-export const Post = ({ userData, id, body, postTime, owner }) => {
+export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})
 	
 	const [ likeId, setLikeId ] = useState(false)
@@ -25,7 +25,7 @@ export const Post = ({ userData, id, body, postTime, owner }) => {
 			try {
 				const { data } = await API.graphql({
 					query: getUserByUsername,
-					variables: { username: owner }
+					variables: { username: authorId }
 				})
 				setUserData(data.getUserByUsername.items[0])
 			} catch (err) {
@@ -66,7 +66,7 @@ export const Post = ({ userData, id, body, postTime, owner }) => {
 		}
 		
 		fetchPostLikes()
-	}, [ owner ])
+	}, [ owner, userData.username ])
 
 	const handleLike = async () => {
 		try {

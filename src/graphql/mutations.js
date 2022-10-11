@@ -1,12 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const updateFollowing = /* GraphQL */ `
-  mutation UpdateFollowing(
-    $input: UpdateFollowingInput!
-    $condition: ModelFollowingConditionInput
+export const updateFollow = /* GraphQL */ `
+  mutation UpdateFollow(
+    $input: UpdateFollowInput!
+    $condition: ModelFollowConditionInput
   ) {
-    updateFollowing(input: $input, condition: $condition) {
+    updateFollow(input: $input, condition: $condition) {
       id
       owner
       user {
@@ -31,7 +31,8 @@ export const updateFollowing = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      followingId
+      userId
+      followId
       createdAt
       updatedAt
       userFollowingId
@@ -62,6 +63,7 @@ export const updatePostLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -108,6 +110,7 @@ export const updateCommentLike = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -145,6 +148,7 @@ export const createUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -181,7 +185,8 @@ export const createUser = /* GraphQL */ `
         items {
           id
           owner
-          followingId
+          userId
+          followId
           createdAt
           updatedAt
           userFollowingId
@@ -211,6 +216,7 @@ export const updateUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -247,7 +253,8 @@ export const updateUser = /* GraphQL */ `
         items {
           id
           owner
-          followingId
+          userId
+          followId
           createdAt
           updatedAt
           userFollowingId
@@ -277,6 +284,7 @@ export const deleteUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -313,7 +321,8 @@ export const deleteUser = /* GraphQL */ `
         items {
           id
           owner
-          followingId
+          userId
+          followId
           createdAt
           updatedAt
           userFollowingId
@@ -325,12 +334,12 @@ export const deleteUser = /* GraphQL */ `
     }
   }
 `;
-export const createFollowing = /* GraphQL */ `
-  mutation CreateFollowing(
-    $input: CreateFollowingInput!
-    $condition: ModelFollowingConditionInput
+export const createFollow = /* GraphQL */ `
+  mutation CreateFollow(
+    $input: CreateFollowInput!
+    $condition: ModelFollowConditionInput
   ) {
-    createFollowing(input: $input, condition: $condition) {
+    createFollow(input: $input, condition: $condition) {
       id
       owner
       user {
@@ -355,19 +364,20 @@ export const createFollowing = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      followingId
+      userId
+      followId
       createdAt
       updatedAt
       userFollowingId
     }
   }
 `;
-export const deleteFollowing = /* GraphQL */ `
-  mutation DeleteFollowing(
-    $input: DeleteFollowingInput!
-    $condition: ModelFollowingConditionInput
+export const deleteFollow = /* GraphQL */ `
+  mutation DeleteFollow(
+    $input: DeleteFollowInput!
+    $condition: ModelFollowConditionInput
   ) {
-    deleteFollowing(input: $input, condition: $condition) {
+    deleteFollow(input: $input, condition: $condition) {
       id
       owner
       user {
@@ -392,7 +402,8 @@ export const deleteFollowing = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      followingId
+      userId
+      followId
       createdAt
       updatedAt
       userFollowingId
@@ -431,6 +442,7 @@ export const createPost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      authorId
       comments {
         items {
           id
@@ -495,6 +507,7 @@ export const updatePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      authorId
       comments {
         items {
           id
@@ -559,6 +572,7 @@ export const deletePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      authorId
       comments {
         items {
           id
@@ -615,6 +629,7 @@ export const createPostLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -656,6 +671,7 @@ export const deletePostLike = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -720,6 +736,7 @@ export const createComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -796,6 +813,7 @@ export const updateComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -872,6 +890,7 @@ export const deleteComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        authorId
         comments {
           nextToken
         }
@@ -930,6 +949,7 @@ export const createCommentLike = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId
@@ -978,6 +998,7 @@ export const deleteCommentLike = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           createdAt
           updatedAt
           userPostsId

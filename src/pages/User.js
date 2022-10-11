@@ -5,11 +5,11 @@ import { API } from 'aws-amplify'
 import {
 	getUserByUsername,
 	listPosts,
-	listFollowingByFollowingId
+	listFollowsByFollowId
 } from '../graphql/queries'
 import {
-	createFollowing,
-	deleteFollowing
+	createFollow,
+	deleteFollow
 } from '../graphql/mutations'
 
 import { Post } from '../comps/base/jsx/Post'
@@ -18,9 +18,9 @@ export const User = ({ userData, id }) => {
 	const { username } = useParams()
 
 	const [ posts, setPosts ] = useState([])
-	const [ { name, avatar, owner }, setUserData ] = useState({})
+	const [ { name, avatar }, setUserData ] = useState({})
 	
-	const [ followingId, setFollowingId ] = useState(false)
+	const [ followId, setFollowId ] = useState(false)
 	const [ followers, setFollowers ] = useState([])
 
 	useEffect(() => {
@@ -55,14 +55,14 @@ export const User = ({ userData, id }) => {
 		const fetchFollowers = async () => {
 			try {
 				const { data } = await API.graphql({
-					query: listFollowingByFollowingId,
-					variables: { followingId: username }
+					query: listFollowsByFollowId,
+					variables: { followId: username }
 				})
-				const valFollowers = validateFollowers(data.listFollowingByFollowingId.items)
+				const valFollowers = validateFollowers(data.listFollowsByFollowId.items)
 				
 				for (let i in valFollowers)
 					if (valFollowers[i].owner === userData.username) {
-						setFollowingId(valFollowers[i].id)
+						setFollowId(valFollowers[i].id)
 						return
 					}
 			} catch (err) {
@@ -73,9 +73,7 @@ export const User = ({ userData, id }) => {
 		const validateFollowers = followers => {
 			// Make sure each follow is valid by having one user for each one
 			const userFollowers = {}
-			followers.map(({ owner, id }) => {
-				userFollowers[owner] = id
-			})
+			followers.map(({ owner, id }) => userFollowers[owner] = id)
 			let valFollowers = []
 			for (let owner in userFollowers)
 				valFollowers.push({ id: userFollowers[owner], owner })
@@ -84,18 +82,21 @@ export const User = ({ userData, id }) => {
 		}
 		
 		fetchFollowers()
-	}, [ username ])
+	}, [ username, userData.username ])
 
 	const handleFollow = async () => {
 		try {
 			const { data } = await API.graphql({
-				query: createFollowing,
-				variables: { input: { followingId: username } },
+				query: createFollow,
+				variables: { input: {
+					userId: userData.owner,
+					followId: username
+				}},
 				authMode: 'AMAZON_COGNITO_USER_POOLS'
 			})
 
-			setFollowers([ ...followers, data.createFollowing ])
-			setFollowingId(data.createFollowing.id)
+			setFollowers([ ...followers, data.createFollow ])
+			setFollowId(data.createFollow.id)
 		} catch (err) {
 			console.log('error following user', err)
 		}
@@ -104,13 +105,13 @@ export const User = ({ userData, id }) => {
 	const handleUnfollow = async () => {
 		try {
 			await API.graphql({
-				query: deleteFollowing,
-				variables: { input: { id: followingId } },
+				query: deleteFollow,
+				variables: { input: { id: followId } },
 				authMode: 'AMAZON_COGNITO_USER_POOLS'
 			})
 
-			setFollowers(followers.filter(id => id === followingId))
-			setFollowingId(false)
+			setFollowers(followers.filter(id => id === followId))
+			setFollowId(false)
 		} catch (err) {
 			console.log('error unfollowing user', err)
 		}
@@ -126,7 +127,7 @@ export const User = ({ userData, id }) => {
 			<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i> {username === userData.username && ' - You'}</h3>
 			
 			<p>{followers !== [] ? `${followers.length} followers` : ''}</p>
-			{(userData.username !== username) && (followingId ? (
+			{(userData.username !== username) && (followId ? (
 				<button
 					className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
 					onClick={handleUnfollow}

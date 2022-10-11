@@ -9,7 +9,7 @@ import { deleteComment } from '../graphql/mutations'
 //import { CommentTimeline } from './CommentTimeline'
 
 export const Comment = ({ userData }) => {
-	const { username, postId, commentId: id } = useParams()
+	const { username, /*postId,*/ commentId: id } = useParams()
 
 	const [ { body, postTime }, setCommentData ] = useState({})
 	const [ { name, avatar }, setUserData ] = useState({})
