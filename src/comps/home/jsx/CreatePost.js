@@ -14,7 +14,7 @@ export const CreatePost = ({ posts, setPosts, userData }) => {
 				const input = {
 					body,
 					postTime: new Date().toISOString(),
-					likes: [],
+					//likes: [],
 					authorId: username
 				}
 				const { data } = await API.graphql({

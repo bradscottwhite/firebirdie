@@ -13,6 +13,8 @@ import {
 	deletePost 
 } from '../graphql/mutations'
 
+import { convertTime } from '../convertTime'
+
 import { CreateComment } from '../comps/post/jsx/CreateComment'
 import { Timeline } from '../comps/post/jsx/Timeline'
 
@@ -122,9 +124,6 @@ export const Post = ({ userData }) => {
 		}
 	}
 
-	const time = postTime
-	//console.log(postTime)
-
 	return (
 		<div>
 			<div>
@@ -136,7 +135,7 @@ export const Post = ({ userData }) => {
 					/>
 					<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i></h3>
 				</Link>
-				<h4> - {time}</h4>
+				<h4> - {convertTime(postTime)}</h4>
 				
 				<p>{body}</p>
 				{/* likes, comments... */}

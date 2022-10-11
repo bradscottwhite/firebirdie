@@ -11,6 +11,8 @@ import {
 	deletePostLike
 } from '../../../graphql/mutations'
 
+import { convertTime } from '../../../convertTime'
+
 import { Avatar, Username } from '../styles/userStyles'
 import { PostBase } from '../styles/postStyles'
 
@@ -98,9 +100,6 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 		}
 	}	
 
-	const time = postTime
-	//console.log(postTime)
-
 	return (
 		<PostBase>
 			<Link to={`/${username}`}>
@@ -110,7 +109,7 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 				/>
 				<Username><b>{name}</b> <i>@{username}</i></Username>
 			</Link>
-			<h4> - {time}</h4>
+			<h4> - {convertTime(postTime)}</h4>
 			
 			<Link to={`/${username}/${id}`}>
 				<p>{body}</p>

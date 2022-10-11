@@ -11,6 +11,8 @@ import {
 	deleteCommentLike
 } from '../../../graphql/mutations'
 
+import { convertTime } from '../../../convertTime'
+
 import { Avatar, Username } from '../../base/styles/userStyles'
 import { PostBase } from '../../base/styles/postStyles'
 
@@ -98,9 +100,6 @@ export const Comment = ({ userData, postId, id, body, postTime, owner }) => {
 		}
 	}	
 
-	const time = postTime
-	//console.log(postTime)
-
 	return (
 		<PostBase>
 			<Link to={`/${username}`}>
@@ -111,7 +110,7 @@ export const Comment = ({ userData, postId, id, body, postTime, owner }) => {
 				/>
 				<Username><b>{name}</b> <i>@{username}</i></Username>
 			</Link>
-			<h4> - {time}</h4>
+			<h4> - {convertTime(postTime)}</h4>
 			
 			<Link to={`/${username}/${postId}/${id}`}>
 				<p>{body}</p>
