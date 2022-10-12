@@ -6,19 +6,20 @@ import {
 	getUserByUsername,
 	listPostLikesByPostId,
 	getPost 
-} from '../graphql/queries'
+} from '../../../graphql/queries'
 import {
 	createPostLike,
 	deletePostLike,
 	deletePost 
-} from '../graphql/mutations'
+} from '../../../graphql/mutations'
 
-import { convertTime } from '../convertTime'
+import { convertTime } from '../../../convertTime'
 
-import { CreateComment } from '../comps/post/jsx/CreateComment'
-import { Timeline } from '../comps/post/jsx/Timeline'
+import { Page } from '../../base/jsx/Page'
+import { CreateComment } from './CreateComment'
+import { Timeline } from './Timeline'
 
-export const Post = ({ userData }) => {
+export const PostPage = ({ userData }) => {
 	const { username, postId: id } = useParams()
 	
 	const [ likeId, setLikeId ] = useState(false)
@@ -125,7 +126,7 @@ export const Post = ({ userData }) => {
 	}
 
 	return (
-		<div>
+		<Page title='Post'>
 			<div>
 				<Link to={`/${username}`}>
 					<img
@@ -166,6 +167,6 @@ export const Post = ({ userData }) => {
 			<CreateComment userData={userData} postId={id} comments={comments} setComments={setComments} />
 
 			<Timeline userData={userData} postId={id} comments={comments} setComments={setComments} />
-		</div>
+		</Page>
 	)
 };

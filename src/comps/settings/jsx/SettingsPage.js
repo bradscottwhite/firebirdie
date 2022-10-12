@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
-import { updateUser } from '../graphql/mutations'
+import { updateUser } from '../../../graphql/mutations'
 
-export const Settings  = ({ userData: { id, username, name, avatar }, setUserData }) => {
+import { Page } from '../../base/jsx/Page'
+
+export const SettingsPage  = ({ userData: { id, username, name, avatar }, setUserData }) => {
 	const [ newName, setName ] = useState(name)
 	const [ newAvatar, setAvatar ] = useState(avatar)
 
@@ -30,9 +32,7 @@ export const Settings  = ({ userData: { id, username, name, avatar }, setUserDat
 	}
 
 	return (
-		<div>
-			<h1>User settings</h1>
-			
+		<Page title='User Settings'>
 			<p>Name</p>
 			<input
 				value={newName}
@@ -56,6 +56,6 @@ export const Settings  = ({ userData: { id, username, name, avatar }, setUserDat
 			</button>
 			
 			<Link to='/'>Home</Link>
-		</div>
+		</Page>
 	)
 };

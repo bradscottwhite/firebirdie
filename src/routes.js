@@ -1,24 +1,24 @@
-import { Home } from './pages/Home'
-import { Settings } from './pages/Settings'
-import { User } from './pages/User'
-import { Post } from './pages/Post'
-import { Comment } from './pages/Comment'
+import { HomePage } from './comps/home/jsx/HomePage'
+import { SettingsPage } from './comps/settings/jsx/SettingsPage'
+import { UserPage } from './comps/user/jsx/UserPage'
+import { PostPage } from './comps/post/jsx/PostPage'
+import { CommentPage } from './comps/comment/jsx/CommentPage'
 
 export const routes = [
 	{
 		path: '/',
-		El: Home,
+		El: HomePage,
 	}, {
 		path: '/settings',
-		El: Settings,
+		El: SettingsPage,
 	}, {
 		path: '/:username',
-		El: User
+		El: UserPage
 	}, {
 		path: '/:username/:postId',
-		El: Post
+		El: PostPage
 	}, {
 		path: '/:username/:postId/:commentId',
-		El: Comment
+		El: CommentPage
 	}
 ];

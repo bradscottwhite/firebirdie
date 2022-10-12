@@ -6,15 +6,16 @@ import {
 	getUserByUsername,
 	listPosts,
 	listFollowsByFollowId
-} from '../graphql/queries'
+} from '../../../graphql/queries'
 import {
 	createFollow,
 	deleteFollow
-} from '../graphql/mutations'
+} from '../../../graphql/mutations'
 
-import { Post } from '../comps/base/jsx/Post'
+import { Page } from '../../base/jsx/Page'
+import { Post } from '../../base/jsx/Post'
 
-export const User = ({ userData, id }) => {
+export const UserPage = ({ userData, id }) => {
 	const { username } = useParams()
 
 	const [ posts, setPosts ] = useState([])
@@ -118,7 +119,7 @@ export const User = ({ userData, id }) => {
 	}	
 
 	return (
-		<div>
+		<Page title={name}>
 			<img
 				alt={username}
 				src={avatar}
@@ -142,6 +143,6 @@ export const User = ({ userData, id }) => {
 			{posts.map(props => (
 				<Post userData={userData} {...props} />
 			))}
-		</div>
+		</Page>
 	)
 };

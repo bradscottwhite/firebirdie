@@ -2,15 +2,14 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
-import { getUserByUsername, getComment } from '../graphql/queries'
-import { deleteComment } from '../graphql/mutations'
+import { getUserByUsername, getComment } from '../../../graphql/queries'
+import { deleteComment } from '../../../graphql/mutations'
 
-import { convertTime } from '../convertTime'
+import { convertTime } from '../../../convertTime'
 
-//import { CreateComment } from './CreateComment'
-//import { CommentTimeline } from './CommentTimeline'
+import { Page } from '../../base/jsx/Page'
 
-export const Comment = ({ userData }) => {
+export const CommentPage = ({ userData }) => {
 	const { username, /*postId,*/ commentId: id } = useParams()
 
 	const [ { body, postTime }, setCommentData ] = useState({})
@@ -59,7 +58,7 @@ export const Comment = ({ userData }) => {
 	}
 
 	return (
-		<div>
+		<Page title='Comment'>
 			<div>
 				<Link to={`/${username}`}>
 					<img
@@ -87,6 +86,6 @@ export const Comment = ({ userData }) => {
 			{/*<CreateComment comments={comments} setComments={setComments} userData={{ username, avatar, name }} />*/}
 
 			{/*<CommentTimeline postId={id} comments={comments} setComments={setComments} />*/}
-		</div>
+		</Page>
 	)
 };

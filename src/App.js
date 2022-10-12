@@ -1,7 +1,5 @@
 import { Authenticator } from '@aws-amplify/ui-react'
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
 import { useEffect, useState } from 'react'
 
 import { routes } from './routes'
@@ -9,8 +7,10 @@ import { routes } from './routes'
 import { API } from 'aws-amplify'
 import { getUserByUsername } from './graphql/queries'
 
-import { Main } from './Main'
+import { Nav } from './comps/base/jsx/Nav'
 import { CreateUser } from './comps/base/jsx/CreateUser'
+
+import { Wrapper, Loading } from './comps/base/styles/baseStyles'
 
 const App = () => {
 	return (
@@ -43,9 +43,11 @@ const LogIn = ({ username, signOut }) => {
 
 	return (
 		<BrowserRouter>
-			<Main signOut={signOut} username={username}>
+			<Wrapper>
+				<Nav signOut={signOut} username={username} />
+				
 				{loading ? (
-					<h2>Loading...</h2>
+					<Loading>Loading...</Loading>
 				) : (
 					userData ? (
 						<Router userData={userData} setUserData={setUserData} />
@@ -53,7 +55,7 @@ const LogIn = ({ username, signOut }) => {
 						<CreateUser username={username} setUserData={setUserData} />
 					)
 				)}
-			</Main>
+			</Wrapper>
 		</BrowserRouter>
 	)
 }

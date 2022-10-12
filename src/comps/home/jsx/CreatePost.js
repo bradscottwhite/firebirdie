@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { API } from 'aws-amplify'
 import { createPost } from '../../../graphql/mutations'
 
+import { Base, Avatar, Text, PostBtn, PostIcon } from '../styles/createPostStyles'
+
 export const CreatePost = ({ posts, setPosts, userData }) => {
 	const { username, avatar, name } = userData
 
@@ -30,24 +32,22 @@ export const CreatePost = ({ posts, setPosts, userData }) => {
 	}
 
 	return (
-		<div>
-			<img
+		<Base>
+			<Avatar
 				alt={username}
 				src={avatar}
-				className='w-10 h-10 rounded-3xl'
 			/>
-			<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i></h3>
-			
-			<textarea
+
+			<Text
 				value={body}
 				placeholder='Enter post...'
 				onChange={e => setBody(e.target.value)}
-			></textarea>
-			
-			<button
-				className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-				onClick={handlePost}
-			>Post</button>
-		</div>
+			/>
+
+			<PostBtn onClick={handlePost}>
+				<PostIcon/>
+				Post
+			</PostBtn>
+		</Base>
 	)
 };
