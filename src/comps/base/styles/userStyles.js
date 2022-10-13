@@ -8,5 +8,5 @@ export const Avatar = tw.img`
 
 export const Username = tw.h3`
 	text-xl
-	text-orange-400
+	text-pale-silver
 `

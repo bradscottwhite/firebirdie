@@ -19,7 +19,7 @@ import { Page } from '../../base/jsx/Page'
 import { CreateComment } from './CreateComment'
 import { Timeline } from './Timeline'
 
-export const PostPage = ({ userData }) => {
+export const PostPage = ({ userData, darkMode, setDarkMode }) => {
 	const { username, postId: id } = useParams()
 	
 	const [ likeId, setLikeId ] = useState(false)

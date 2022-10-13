@@ -9,7 +9,7 @@ import { convertTime } from '../../../convertTime'
 
 import { Page } from '../../base/jsx/Page'
 
-export const CommentPage = ({ userData }) => {
+export const CommentPage = ({ userData, darkMode, setDarkMode }) => {
 	const { username, /*postId,*/ commentId: id } = useParams()
 
 	const [ { body, postTime }, setCommentData ] = useState({})
@@ -58,7 +58,7 @@ export const CommentPage = ({ userData }) => {
 	}
 
 	return (
-		<Page title='Comment'>
+		<Page title='Comment' darkMode={darkMode} setDarkMode={setDarkMode}>
 			<div>
 				<Link to={`/${username}`}>
 					<img

@@ -14,7 +14,7 @@ import {
 import { convertTime } from '../../../convertTime'
 
 import { Avatar, Username } from '../../base/styles/userStyles'
-import { PostBase } from '../../base/styles/postStyles'
+import { Base } from '../../base/styles/postStyles'
 
 export const Comment = ({ userData, postId, id, body, postTime, owner }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})
@@ -101,7 +101,7 @@ export const Comment = ({ userData, postId, id, body, postTime, owner }) => {
 	}	
 
 	return (
-		<PostBase>
+		<Base>
 			<Link to={`/${username}`}>
 				<Avatar
 					alt={username}
@@ -129,6 +129,6 @@ export const Comment = ({ userData, postId, id, body, postTime, owner }) => {
 					onClick={handleLike}
 				>Like</button>
 			)}
-		</PostBase>
+		</Base>
 	)
 };

@@ -6,7 +6,7 @@ import { updateUser } from '../../../graphql/mutations'
 
 import { Page } from '../../base/jsx/Page'
 
-export const SettingsPage  = ({ userData: { id, username, name, avatar }, setUserData }) => {
+export const SettingsPage  = ({ userData: { id, username, name, avatar }, setUserData, darkMode, setDarkMode }) => {
 	const [ newName, setName ] = useState(name)
 	const [ newAvatar, setAvatar ] = useState(avatar)
 
@@ -32,7 +32,7 @@ export const SettingsPage  = ({ userData: { id, username, name, avatar }, setUse
 	}
 
 	return (
-		<Page title='User Settings'>
+		<Page title='User Settings' darkMode={darkMode} setDarkMode={setDarkMode}>
 			<p>Name</p>
 			<input
 				value={newName}

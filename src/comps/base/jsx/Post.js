@@ -13,8 +13,9 @@ import {
 
 import { convertTime } from '../../../convertTime'
 
-import { Avatar, Username } from '../styles/userStyles'
-import { PostBase } from '../styles/postStyles'
+import { Base, Avatar, Bio, Name, Stats, Username, Time, TimeDot, Text, LikeBtn, LikeIcon, UnlikeIcon } from '../styles/postStyles'
+
+import '../styles/Post.css'
 
 export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})
@@ -98,36 +99,55 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 		} catch (err) {
 			console.log('error unliking post', err)
 		}
-	}	
+	}
+
+	const variants = {
+		closed: { opacity: 0 },
+		open: { opacity: 1 }
+	}
 
 	return (
-		<PostBase>
-			<Link to={`/${username}`}>
+		<Base
+			variants={variants}
+			exit='closed'
+		>
+			<Link className='profile-link' to={`/${username}`}>
 				<Avatar
 					alt={username}
 					src={avatar}
 				/>
-				<Username><b>{name}</b> <i>@{username}</i></Username>
-			</Link>
-			<h4> - {convertTime(postTime)}</h4>
-			
-			<Link to={`/${username}/${id}`}>
-				<p>{body}</p>
-				{/* likes, comments... */}
-			</Link>
 
-			<p>{likes !== [] ? `${likes.length} likes` : ''}</p>
-			{likeId ? (
-				<button
-					className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-					onClick={handleUnlike}
-				>Unlike</button>
-			) : (
-				<button
-					className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-					onClick={handleLike}
-				>Like</button>
-			)}
-		</PostBase>
+				<Bio>{username}</Bio>
+			</Link>
+			
+			<div>	
+				<Stats>
+					<Link className='profile-link' to={`/${username}`}>
+						<Name>{name}</Name>
+						<Bio>{username}</Bio>
+					</Link>
+					<Username>@{username}</Username>
+					<Time>
+						<TimeDot>·</TimeDot>
+						{convertTime(postTime)}
+					</Time>
+				</Stats>
+
+				<Text to={`/${username}/${id}`}>
+					{body}
+				</Text>
+
+				{likeId ? (
+					<LikeBtn onClick={handleUnlike}>
+						<UnlikeIcon/>
+					</LikeBtn>
+				) : (
+					<LikeBtn onClick={handleLike}>
+						<LikeIcon/>
+					</LikeBtn>
+				)}
+				<p>{likes !== [] ? `${likes.length} likes` : ''}</p>
+			</div>
+		</Base>
 	)
 };

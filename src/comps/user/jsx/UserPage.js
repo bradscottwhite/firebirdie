@@ -15,7 +15,7 @@ import {
 import { Page } from '../../base/jsx/Page'
 import { Post } from '../../base/jsx/Post'
 
-export const UserPage = ({ userData, id }) => {
+export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
 	const { username } = useParams()
 
 	const [ posts, setPosts ] = useState([])
@@ -119,7 +119,7 @@ export const UserPage = ({ userData, id }) => {
 	}	
 
 	return (
-		<Page title={name}>
+		<Page title={name} darkMode={darkMode} setDarkMode={setDarkMode}>
 			<img
 				alt={username}
 				src={avatar}

@@ -13,14 +13,24 @@ import { CreateUser } from './comps/base/jsx/CreateUser'
 import { Wrapper, Loading } from './comps/base/styles/baseStyles'
 
 const App = () => {
+	const [ darkMode, setDarkMode ] = useState(false)
+	// Detect stored preference for light or dark mode:
+	window.matchMedia('(prefers-color-scheme: dark)')
+		.addEventListener('change', e => {
+			if (e.matches)
+				setDarkMode(true)
+		})
+
 	return (
-		<Authenticator>
-			{({ user: { username }, signOut }) => <LogIn username={username} signOut={signOut} />}
-		</Authenticator>
+		<div className={darkMode ? 'dark' : ''}>
+			<Authenticator>
+				{({ user: { username }, signOut }) => <LogIn darkMode={darkMode} setDarkMode={setDarkMode} username={username} signOut={signOut} />}
+			</Authenticator>
+		</div>
 	)
 }
 
-const LogIn = ({ username, signOut }) => {
+const LogIn = ({ username, signOut, darkMode, setDarkMode }) => {
 	const [ userData, setUserData ] = useState(false)
 	const [ loading, setLoading ] = useState(true)
 
@@ -50,7 +60,7 @@ const LogIn = ({ username, signOut }) => {
 					<Loading>Loading...</Loading>
 				) : (
 					userData ? (
-						<Router userData={userData} setUserData={setUserData} />
+						<Router darkMode={darkMode} setDarkMode={setDarkMode} userData={userData} setUserData={setUserData} />
 					) : (
 						<CreateUser username={username} setUserData={setUserData} />
 					)
@@ -60,12 +70,12 @@ const LogIn = ({ username, signOut }) => {
 	)
 }
 
-const Router = ({ userData, setUserData }) => (
+const Router = ({ userData, setUserData, darkMode, setDarkMode }) => (
 	<Routes>
 		{routes.map(({ path, El }) => (
 			<Route
 				path={path}
-				element={<El userData={userData} setUserData={setUserData} />}
+				element={<El darkMode={darkMode} setDarkMode={setDarkMode} userData={userData} setUserData={setUserData} />}
 			></Route>
 		))}
 	</Routes>

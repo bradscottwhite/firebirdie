@@ -1,15 +1,15 @@
-import { Base, Header, Title, Body } from '../styles/pageStyles'
+import { Base, Header, Title, Body, ModeIcon } from '../styles/pageStyles'
 
-export const Page = ({ children, title }) => {
-	return (
-		<Base>
-			<Header>
-				<Title>{title}</Title>
-			</Header>
+export const Page = ({ children, title, darkMode, setDarkMode }) => (
+	<Base>
+		<Header>
+			<Title>{title}</Title>
 
-			<Body>
-				{children}
-			</Body>
-		</Base>
-	)
-};
+			<ModeIcon onClick={() => setDarkMode(!darkMode)} dark={darkMode} />
+		</Header>
+
+		<Body>
+			{children}
+		</Body>
+	</Base>
+);

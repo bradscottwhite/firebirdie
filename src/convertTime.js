@@ -21,12 +21,12 @@ export const convertTime = time => {
 		return `${year - curYear} year(s) ago`
 	else if (month - curMonth > 1)
 		return `${month - curMonth} month(s) ago`
-	if (day - curDay > 1)
+	else if (day - curDay > 1)
 		return `${day - curDay} day(s) ago`
-	if (hours - curHours > 1)
+	else if (hours - curHours > 1)
 		return `${hours - curHours} hours(s) ago`
-	if (min - curMin > 1)
+	else if (min - curMin > 1)
 		return `${min - curMin} minute(s) ago`
-	if (sec - curSec > 1)
+	else if (sec - curSec > 1)
 		return `${sec - curSec} second(s) ago`
 };

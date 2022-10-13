@@ -4,7 +4,10 @@ export const Wrapper = tw.div`
 	flex
 	w-screen
 	h-screen
-	bg-purple-600
+	bg-white
+	/*bg-gradient-to-br
+	from-pri-bg
+	to-sec-bg*/
 `
 
 export const Loading = tw.h2``

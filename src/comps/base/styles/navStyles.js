@@ -6,17 +6,16 @@ export const Base = tw.div`
 	h-screen
 	overflow-hidden
 	border-r-2
-	border-purple-700
+	border-isabelline
 `
 
-export const Logo = tw.h2`
-	text-orange-500
+export const Logo = tw(Link)`
 	flex
 	justify-center
 	my-4
 	py-2
 	mx-24
-	hover:bg-purple-700
+	hover:bg-vermillion
 	rounded-[3rem]
 	hover:cursor-pointer
 	hover:drop-shadow-xl
@@ -46,9 +45,9 @@ export const NavLink = tw(Link)`
 	py-4
 	px-6
 	my-2
-	text-purple-800
-	hover:text-white
-	hover:bg-purple-700
+	text-smoky-black
+	hover:text-umber
+	hover:bg-isabelline
 	rounded-[3rem]
 	transition
 	ease-in-out
