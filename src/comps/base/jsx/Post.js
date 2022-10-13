@@ -13,7 +13,7 @@ import {
 
 import { convertTime } from '../../../convertTime'
 
-import { Base, Avatar, Bio, Name, Stats, Username, Time, TimeDot, Text, LikeBtn, LikeIcon, UnlikeIcon } from '../styles/postStyles'
+import { Base, Avatar, Bio, Name, Stats, Username, Time, TimeDot, Text, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon } from '../styles/postStyles'
 
 import '../styles/Post.css'
 
@@ -137,16 +137,20 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 					{body}
 				</Text>
 
-				{likeId ? (
-					<LikeBtn onClick={handleUnlike}>
-						<UnlikeIcon/>
-					</LikeBtn>
-				) : (
-					<LikeBtn onClick={handleLike}>
-						<LikeIcon/>
-					</LikeBtn>
-				)}
-				<p>{likes !== [] ? `${likes.length} likes` : ''}</p>
+				<Likes>
+					<LikeCount>
+						{likes !== [] ? `${likes.length} likes` : ''}
+					</LikeCount>
+					{likeId ? (
+						<LikeBtn onClick={handleUnlike}>
+							<UnlikeIcon/>
+						</LikeBtn>
+					) : (
+						<LikeBtn onClick={handleLike}>
+							<LikeIcon/>
+						</LikeBtn>
+					)}
+				</Likes>
 			</div>
 		</Base>
 	)

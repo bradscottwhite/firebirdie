@@ -3,17 +3,18 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 export const Base = tw(motion.div)`
-	border-b-2
+	border-b-[1px]
 	border-isabelline
+	dark:border-cinereous
 	flex
 	pt-4
-	pb-8
+	pb-2
 `
 
 export const Avatar = tw.img`
-	w-12
-	h-12
-	rounded-[3rem]
+	w-10
+	h-10
+	rounded-full
 	ml-8
 	mr-4
 	drop-shadow-xl
@@ -33,11 +34,16 @@ export const Bio = tw.div`
 
 export const Stats = tw.div`
 	flex
+	mb-2
+	text-pale-silver
+	dark:text-umber
 `
 
 export const Name = tw.h3`
 	font-bold
 	hover:underline
+	text-umber
+	dark:text-pale-silver
 `
 
 export const Username = tw.i`
@@ -57,18 +63,30 @@ export const TimeDot = tw.b`
 
 export const Text = tw(Link)`
 	text-smoky-black
+	dark:text-white
 	text-md
+`
+
+export const Likes = tw.div`
+	flex
+	text-pale-silver
+	dark:text-umber
+`
+
+export const LikeCount = tw.p`
 	py-4
+	text-sm
 `
 
 export const LikeBtn = tw.button`
-	rounded-[3rem]
-	py-2
-	px-6
-	text-pale-silver
+	rounded-full
+	w-10
+	h-10
+	mx-4
+	pl-2
+	my-0.5
 	hover:text-flame
 	hover:bg-vermillion
-	rounded-[3rem]
 	transition
 	ease-in-out
 	delay-150
@@ -76,7 +94,7 @@ export const LikeBtn = tw.button`
 	hover:scale-110
 	hover:drop-shadow-xl
 	drop-shadow-lg
-	text-lg
+	text-md
 `
 
 export const LikeIcon = tw.div`

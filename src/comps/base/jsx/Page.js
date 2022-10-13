@@ -5,7 +5,10 @@ export const Page = ({ children, title, darkMode, setDarkMode }) => (
 		<Header>
 			<Title>{title}</Title>
 
-			<ModeIcon onClick={() => setDarkMode(!darkMode)} dark={darkMode} />
+			<ModeIcon onClick={() => {
+				localStorage.theme = !darkMode ? 'dark' : 'light'
+				setDarkMode(!darkMode)
+			}} dark={darkMode} />
 		</Header>
 
 		<Body>

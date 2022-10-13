@@ -14,12 +14,23 @@ import { Wrapper, Loading } from './comps/base/styles/baseStyles'
 
 const App = () => {
 	const [ darkMode, setDarkMode ] = useState(false)
-	// Detect stored preference for light or dark mode:
-	window.matchMedia('(prefers-color-scheme: dark)')
-		.addEventListener('change', e => {
-			if (e.matches)
-				setDarkMode(true)
-		})
+
+	useEffect(() => {
+		// On page load or when changing themes, best to add inline in `head` to avoid FOUC
+		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches))
+			setDarkMode(true)
+		else
+			setDarkMode(false)
+
+		// Whenever the user explicitly chooses light mode
+		//localStorage.theme = 'light'
+
+		// Whenever the user explicitly chooses dark mode
+		//localStorage.theme = 'dark'
+
+		// Whenever the user explicitly chooses to respect the OS preference
+		//localStorage.removeItem('theme')
+	}, [])
 
 	return (
 		<div className={darkMode ? 'dark' : ''}>

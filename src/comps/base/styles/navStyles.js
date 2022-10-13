@@ -5,8 +5,9 @@ export const Base = tw.div`
 	w-1/4
 	h-screen
 	overflow-hidden
-	border-r-2
+	border-r-[1px]
 	border-isabelline
+	dark:border-cinereous
 `
 
 export const Logo = tw(Link)`
@@ -16,7 +17,7 @@ export const Logo = tw(Link)`
 	py-2
 	mx-24
 	hover:bg-vermillion
-	rounded-[3rem]
+	rounded-full
 	hover:cursor-pointer
 	hover:drop-shadow-xl
 	transition
@@ -46,9 +47,12 @@ export const NavLink = tw(Link)`
 	px-6
 	my-2
 	text-smoky-black
+	dark:text-white
 	hover:text-umber
+	dark:hover:text-isabelline
 	hover:bg-isabelline
-	rounded-[3rem]
+	dark:hover:bg-pale-silver
+	rounded-full
 	transition
 	ease-in-out
 	delay-150
@@ -63,5 +67,4 @@ export const Icon = tw.div`
 	fa ${({ icon }) => icon}
 	text-3xl
 	pr-10
-`
-;
+`;

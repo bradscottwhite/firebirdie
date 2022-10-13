@@ -16,6 +16,7 @@ export const Header = tw.div`
 export const Title = tw.h2`
 	text-xl
 	text-smoky-black
+	dark:text-white
 	drop-shadow-lg
 `
 
@@ -25,13 +26,23 @@ export const ModeIcon = tw.div`
 	mt-[-1.2rem]
 	hover:cursor-pointer
 	hover:text-umber
+	dark:hover:text-isabelline
 	hover:bg-isabelline
+	hover:dark:bg-umber
 	p-4
-	rounded-[3rem]
+	rounded-full
 	text-3xl
 	text-smoky-black
+	dark:text-white
 	absolute
 	right-32
+	transition
+	ease-in-out
+	delay-150
+	duration-300
+	hover:scale-110
+	hover:drop-shadow-xl
+	drop-shadow-lg
 `
 
 export const Body = tw.div`

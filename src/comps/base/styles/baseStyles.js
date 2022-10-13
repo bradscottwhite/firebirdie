@@ -5,6 +5,7 @@ export const Wrapper = tw.div`
 	w-screen
 	h-screen
 	bg-white
+	dark:bg-smoky-black
 	/*bg-gradient-to-br
 	from-pri-bg
 	to-sec-bg*/

@@ -1,16 +1,17 @@
 import tw from 'tailwind-styled-components'
 
 export const Base = tw.div`
-	border-b-2
+	border-b-[1px]
 	border-isabelline
+	dark:border-cinereous
 	flex
 	pt-4
 	pb-8
 `
 
 export const Avatar = tw.img`
-	w-12
-	h-12
+	w-10
+	h-10
 	rounded-[3rem]
 	ml-8
 	mr-4
