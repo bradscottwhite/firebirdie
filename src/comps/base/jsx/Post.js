@@ -13,7 +13,8 @@ import {
 
 import { convertTime } from '../../../convertTime'
 
-import { Base, User, Avatar, Dropdown, Name, Stats, Username, Time, TimeDot, Text, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon } from '../styles/postStyles'
+import { Base, User, Avatar, Name, Stats, Username, Time, TimeDot, Text, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon } from '../styles/postStyles'
+import { Dropdown, DropTop, DropBottom, DropAvatar, DropFollowBtn, DropStats, DropName, DropFollowInfo, DropUsername, DropBio, DropFollowStats } from '../styles/dropdownStyles'
 
 export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})
@@ -124,14 +125,26 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 						transformStyle: 'preserve-3d'
 					}}
 				>
-					<Avatar
-						alt={username}
-						src={avatar}
-					/>
-					<div className='flex'>
-						<Name>{name}</Name>
-						<Username>{username}</Username>
-					</div>
+					<DropTop>
+						<DropAvatar
+							alt={username}
+							src={avatar}
+						/>
+						<DropFollowBtn>Following..</DropFollowBtn>
+					</DropTop>
+
+					<DropBottom>
+						<DropName>{name}</DropName>
+						<DropStats>
+							<DropUsername>{username}</DropUsername>
+							<DropFollowInfo>Follows you..</DropFollowInfo>
+						</DropStats>
+						<DropBio>Bio...</DropBio>
+						<DropFollowStats>
+							3 Following
+							2 Followers
+						</DropFollowStats>
+					</DropBottom>
 				</Dropdown>
 			</User>
 

@@ -31,34 +31,8 @@ export const Avatar = tw.img`
 	ml-8
 	mr-4
 	drop-shadow-xl
-	z-0
-	inline-flex
-	items-center
 `
 
-export const Dropdown = tw.div`
-	group-hover:block
-	hidden
-	absolute
-	hover:flex
-	transition
-	ease-in-out
-	delay-150
-	duration-300
-	bg-white
-	dark:bg-smoky-black
-	border-pale-silver
-	dark:border-umber
-	p-10
-	ml-20
-	mt-[-3rem]
-	${({ name }) => name && 'ml-14 mt-[-2rem]'}
-	h-full
-	rounded-lg
-	shadow-md
-	drop-shadow-xl
-	z-50
-`
 
 export const Stats = tw.div`
 	flex
