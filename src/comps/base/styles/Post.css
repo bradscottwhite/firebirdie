@@ -1,4 +1,0 @@
-/* Avatar/Name hover bio... */
-.profile-link:hover > .bio {
-	@apply grid;
-}

@@ -11,6 +11,9 @@ export const Header = tw.div`
 	pl-20
 	py-4
 	flex
+	border-b-[1px]
+	border-isabelline
+	dark:border-cinereous
 `
 
 export const Title = tw.h2`
@@ -47,6 +50,9 @@ export const ModeIcon = tw.div`
 
 export const Body = tw.div`
 	overflow-y-scroll
-	w-full
+	w-2/3
 	h-[calc(100vh-4rem)]
+	border-r-[1px]
+	border-isabelline
+	dark:border-cinereous
 `;

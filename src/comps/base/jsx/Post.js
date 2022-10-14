@@ -13,9 +13,7 @@ import {
 
 import { convertTime } from '../../../convertTime'
 
-import { Base, Avatar, Bio, Name, Stats, Username, Time, TimeDot, Text, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon } from '../styles/postStyles'
-
-import '../styles/Post.css'
+import { Base, User, Avatar, Dropdown, Name, Stats, Username, Time, TimeDot, Text, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon } from '../styles/postStyles'
 
 export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})
@@ -110,27 +108,42 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 		<Base
 			variants={variants}
 			exit='closed'
+			key={id}
 		>
-			<Link className='profile-link' to={`/${username}`}>
+			<User to={`/${username}`}>
 				<Avatar
+					style={{
+						transformStyle: 'preserve-3d'
+					}}
 					alt={username}
 					src={avatar}
 				/>
 
-				<Bio>{username}</Bio>
-			</Link>
-			
-			<div>	
+				<Dropdown
+					style={{
+						transformStyle: 'preserve-3d'
+					}}
+				>
+					<Avatar
+						alt={username}
+						src={avatar}
+					/>
+					<div className='flex'>
+						<Name>{name}</Name>
+						<Username>{username}</Username>
+					</div>
+				</Dropdown>
+			</User>
+
+			<div>
 				<Stats>
 					<Link className='profile-link' to={`/${username}`}>
 						<Name>{name}</Name>
-						<Bio>{username}</Bio>
+						<Dropdown>{username}</Dropdown>
 					</Link>
 					<Username>@{username}</Username>
-					<Time>
-						<TimeDot>·</TimeDot>
-						{convertTime(postTime)}
-					</Time>
+					<TimeDot>·</TimeDot>
+					<Time>{convertTime(postTime)}</Time>
 				</Stats>
 
 				<Text to={`/${username}/${id}`}>

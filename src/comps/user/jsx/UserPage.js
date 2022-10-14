@@ -13,6 +13,7 @@ import {
 } from '../../../graphql/mutations'
 
 import { Page } from '../../base/jsx/Page'
+import { Base, Hero, Avatar } from '../styles/userStyles'
 import { Post } from '../../base/jsx/Post'
 
 export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
@@ -120,26 +121,28 @@ export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
 
 	return (
 		<Page title={name} darkMode={darkMode} setDarkMode={setDarkMode}>
-			<img
-				alt={username}
-				src={avatar}
-				className='w-10 h-10 rounded-3xl'
-			/>
-			<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i> {username === userData.username && ' - You'}</h3>
-			
-			<p>{followers !== [] ? `${followers.length} followers` : ''}</p>
-			{(userData.username !== username) && (followId ? (
-				<button
-					className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-					onClick={handleUnfollow}
-				>Unfollow</button>
-			) : (
-				<button
-					className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-					onClick={handleFollow}
-				>Follow</button>
-			))}
-			
+			<Base>
+				<Hero/>
+				<Avatar
+					alt={username}
+					src={avatar}
+				/>
+				<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i> {username === userData.username && ' - You'}</h3>
+				
+				<p>{followers !== [] ? `${followers.length} followers` : ''}</p>
+				{(userData.username !== username) && (followId ? (
+					<button
+						className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
+						onClick={handleUnfollow}
+					>Unfollow</button>
+				) : (
+					<button
+						className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
+						onClick={handleFollow}
+					>Follow</button>
+				))}
+			</Base>
+
 			{posts.map(props => (
 				<Post userData={userData} {...props} />
 			))}

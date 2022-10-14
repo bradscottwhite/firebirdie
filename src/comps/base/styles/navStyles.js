@@ -16,7 +16,9 @@ export const Logo = tw(Link)`
 	my-4
 	py-2
 	mx-24
-	hover:bg-vermillion
+	text-flame
+	hover:bg-isabelline
+	dark:hover:bg-pale-silver
 	rounded-full
 	hover:cursor-pointer
 	hover:drop-shadow-xl

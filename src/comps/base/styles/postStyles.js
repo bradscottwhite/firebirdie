@@ -9,6 +9,19 @@ export const Base = tw(motion.div)`
 	flex
 	pt-4
 	pb-2
+	hover:bg-isabelline
+	dark:hover:bg-inherit
+	hover:cursor-pointer
+	transition
+	ease-in-out
+	delay-150
+	duration-300
+	hover:drop-shadow-md
+`
+
+export const User = tw(Link)`
+	group
+	inline-block
 `
 
 export const Avatar = tw.img`
@@ -18,18 +31,32 @@ export const Avatar = tw.img`
 	ml-8
 	mr-4
 	drop-shadow-xl
+	z-0
+	inline-flex
+	items-center
 `
 
-export const Bio = tw.div`
-	bio
+export const Dropdown = tw.div`
+	group-hover:block
 	hidden
-	bg-acc-bg
-	p-10
 	absolute
-	z-10
-	mt-2
-	rounded-md
+	hover:flex
+	transition
+	ease-in-out
+	delay-150
+	duration-300
+	bg-white
+	dark:bg-smoky-black
+	border-pale-silver
+	dark:border-umber
+	p-10
+	ml-20
+	mt-[-3rem]
+	h-full
+	rounded-lg
+	shadow-md
 	drop-shadow-xl
+	z-50
 `
 
 export const Stats = tw.div`
@@ -40,25 +67,30 @@ export const Stats = tw.div`
 `
 
 export const Name = tw.h3`
-	font-bold
+	font-semibold
 	hover:underline
 	text-umber
 	dark:text-pale-silver
+	text-md
 `
 
 export const Username = tw.i`
 	px-2
+	py-0.5
+	text-sm
 `
 
 export const Time = tw.p`
-	pl-2
-	my-[-0.3rem]
+	text-sm
+	py-0.5
 `
 
 export const TimeDot = tw.b`
 	font-bold
 	text-2xl
-	pr-2
+	pl-1
+	pr-3
+	mt-[-0.3rem]
 `
 
 export const Text = tw(Link)`
