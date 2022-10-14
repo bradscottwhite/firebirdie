@@ -137,10 +137,30 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 
 			<div>
 				<Stats>
-					<Link className='profile-link' to={`/${username}`}>
-						<Name>{name}</Name>
-						<Dropdown>{username}</Dropdown>
-					</Link>
+					<User to={`/${username}`}>
+						<Name
+							style={{
+								transformStyle: 'preserve-3d'
+							}}
+						>{name}</Name>
+
+						<Dropdown
+							style={{
+								transformStyle: 'preserve-3d'
+							}}
+							name
+						>
+							<Avatar
+								alt={username}
+								src={avatar}
+							/>
+							<div className='flex'>
+								<Name>{name}</Name>
+								<Username>{username}</Username>
+							</div>
+						</Dropdown>
+					</User>
+
 					<Username>@{username}</Username>
 					<TimeDot>·</TimeDot>
 					<Time>{convertTime(postTime)}</Time>

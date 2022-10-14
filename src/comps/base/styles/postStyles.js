@@ -52,6 +52,7 @@ export const Dropdown = tw.div`
 	p-10
 	ml-20
 	mt-[-3rem]
+	${({ name }) => name && 'ml-14 mt-[-2rem]'}
 	h-full
 	rounded-lg
 	shadow-md
@@ -72,6 +73,9 @@ export const Name = tw.h3`
 	text-umber
 	dark:text-pale-silver
 	text-md
+	z-0
+	inline-flex
+	items-center
 `
 
 export const Username = tw.i`
