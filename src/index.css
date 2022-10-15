@@ -1,3 +1,75 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Authenticaton: */
+
+div[data-amplify-authenticator] {
+	@apply flex items-center justify-center h-screen bg-white dark:bg-smoky-black;
+}
+
+div[data-amplify-container] {
+	@apply dark:text-white bg-white 
+	dark:bg-smoky-black
+	border-pale-silver
+	dark:border-cinereous
+	rounded-lg
+	shadow-md
+	drop-shadow-xl
+	dark:shadow-cinereous;
+}
+
+button[role=^"tab"] {
+	@apply font-bold w-1/2 py-3 text-center;
+}
+button[role=^"tab"][data-state=^"inactive"] {
+	@apply bg-isabelline
+	hover:bg-pale-silver
+	bg-opacity-50
+	dark:bg-cinereous
+	dark:hover:bg-pale-silver;
+}
+button[role=^"tab"]:nth-child(2)[data-state=^"inactive"] {
+	@apply rounded-tr-lg;
+}
+button[role=^"tab"]:nth-child(1)[data-state=^"inactive"] {
+	@apply rounded-tl-lg;
+}
+
+div[role=^"tabpanel"][data-state=^"active"] {
+	@apply px-6 py-6 sm:px-20 sm:py-12;
+}
+div[role=^"tabpanel"][data-state=^"active"] > div[data-amplify-router-content] {
+	@apply flex justify-center text-center;
+}
+.amplify-visually-hidden {
+	@apply hidden;
+}
+.amplify-textfield input {
+	@apply border border-isabelline text-slate-500 rounded-md px-4 py-1 mx-3 my-2;
+}
+.amplify-passwordfield input {
+	@apply rounded-r-none mr-0
+	text-smoky-black
+	dark:text-white
+	placeholder-isabelline
+	focus:outline-none;
+}
+.amplify-passwordfield .amplify-field-group {
+	@apply flex;
+}
+.amplify-passwordfield .amplify-field-group__outer-end > button {
+	@apply border border-isabelline dark:border-cinereous rounded-r-md mt-2 py-1;
+}
+.amplify-field__show-password .amplify-icon > svg {
+	@apply w-4 h-4 mx-1 my-1;
+}
+
+form[data-amplify-form] .amplify-button--primary {
+	@apply mx-6 bg-white dark:bg-smoky-black hover:bg-isabelline hover:bg-opacity-50 dark:hover:bg-cinereous hover:scale-110 transition ease-in-out delay-150 duration-300 hover:drop-shadow-xl rounded-full px-4 py-1 font-bold mb-3;
+}
+
+div[data-amplify-footer] {
+	@apply pt-3 text-sm;
+}

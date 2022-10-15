@@ -23,8 +23,9 @@ export const Text = tw.input`
 	w-2/5
 	px-4
 	text-smoky-black
+	dark:text-white
 	placeholder-isabelline
-	text-md
+	dark:placeholder-cinereous
 	focus:outline-none
 `
 
