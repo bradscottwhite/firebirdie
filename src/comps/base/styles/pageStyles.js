@@ -51,7 +51,8 @@ export const ModeIcon = tw.div`
 
 export const Body = tw.div`
 	overflow-y-scroll
-	w-2/3
+	w-full
+	sm:w-2/3
 	h-[calc(100vh-4rem)]
 	border-r-[1px]
 	border-isabelline

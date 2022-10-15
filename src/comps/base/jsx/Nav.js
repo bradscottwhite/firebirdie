@@ -1,4 +1,4 @@
-import { Base, Logo, LogoSvg, NavLinks, NavLink, Icon } from '../styles/navStyles'
+import { Base, Logo, LogoSvg, NavLinks, NavLink, Icon, Name } from '../styles/navStyles'
 
 export const Nav = ({ signOut, username }) => {
 	const links = [
@@ -41,12 +41,12 @@ export const Nav = ({ signOut, username }) => {
 				{links.map(({ path, name, icon }) => (
 					<NavLink to={path}>
 						<Icon icon={icon} />
-						{name}
+						<Name>{name}</Name>
 					</NavLink>
 				))}
 				<NavLink onClick={signOut} to='/'>
 					<Icon icon='fa-sign-out' />
-					Sign Out
+					<Name>Sign Out</Name>
 				</NavLink>
 			</NavLinks>
 		</Base>

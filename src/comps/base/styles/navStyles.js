@@ -2,7 +2,8 @@ import tw from 'tailwind-styled-components'
 import { Link } from 'react-router-dom'
 
 export const Base = tw.div`
-	w-1/4
+	
+	sm:w-1/4
 	h-screen
 	overflow-hidden
 	border-r-[1px]
@@ -15,7 +16,8 @@ export const Logo = tw(Link)`
 	justify-center
 	my-4
 	py-2
-	mx-24
+	mx-4
+	sm:mx-24
 	text-flame
 	hover:bg-isabelline
 	hover:bg-opacity-25
@@ -33,7 +35,7 @@ export const Logo = tw(Link)`
 export const LogoSvg = tw.svg`
 	w-10
 	h-10
-	mx-1
+	sm:mx-1
 `
 
 export const NavLinks = tw.div`
@@ -65,10 +67,16 @@ export const NavLink = tw(Link)`
 	hover:drop-shadow-xl
 	drop-shadow-lg
 	text-lg
+	flex
 `
 
 export const Icon = tw.div`
 	fa ${({ icon }) => icon}
 	text-3xl
-	pr-10
+	sm:pr-10
+`
+
+export const Name = tw.p`
+	hidden
+	sm:block
 `;
