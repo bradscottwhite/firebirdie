@@ -18,6 +18,7 @@ export const Logo = tw(Link)`
 	mx-24
 	text-flame
 	hover:bg-isabelline
+	hover:bg-opacity-25
 	dark:hover:bg-pale-silver
 	rounded-full
 	hover:cursor-pointer
@@ -53,6 +54,7 @@ export const NavLink = tw(Link)`
 	hover:text-umber
 	dark:hover:text-isabelline
 	hover:bg-isabelline
+	hover:bg-opacity-25
 	dark:hover:bg-pale-silver
 	rounded-full
 	transition

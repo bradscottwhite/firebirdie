@@ -3,6 +3,7 @@ import { SettingsPage } from './comps/settings/jsx/SettingsPage'
 import { UserPage } from './comps/user/jsx/UserPage'
 import { PostPage } from './comps/post/jsx/PostPage'
 import { CommentPage } from './comps/comment/jsx/CommentPage'
+import { ExplorePage } from './comps/explore/jsx/ExplorePage'
 
 export const routes = [
 	{
@@ -20,5 +21,8 @@ export const routes = [
 	}, {
 		path: '/:username/:postId/:commentId',
 		El: CommentPage
+	}, {
+		path: '/explore',
+		El: ExplorePage
 	}
 ];

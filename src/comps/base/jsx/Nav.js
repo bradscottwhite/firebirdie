@@ -7,6 +7,10 @@ export const Nav = ({ signOut, username }) => {
 			name: 'Home',
 			icon: 'fa-home'
 		}, {
+			path: '/explore',
+			name: 'Explore',
+			icon: 'fa-hashtag'
+		}, {
 			path: '/post',//make route later
 			name: 'Post',
 			icon: 'fa-pencil'

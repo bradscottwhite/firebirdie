@@ -31,6 +31,7 @@ export const ModeIcon = tw.div`
 	hover:text-umber
 	dark:hover:text-isabelline
 	hover:bg-isabelline
+	hover:bg-opacity-25
 	hover:dark:bg-umber
 	p-4
 	rounded-full

@@ -34,7 +34,8 @@ export const PostBtn = tw.button`
 	px-6
 	text-flame
 	hover:text-vermillion
-	hover:bg-pale-silver
+	hover:bg-isabelline
+	hover:bg-opacity-25
 	rounded-[3rem]
 	transition
 	ease-in-out

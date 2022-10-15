@@ -77,6 +77,10 @@ export const Text = tw(Link)`
 	text-md
 `
 
+export const Analytics = tw.div`
+	flex
+`
+
 export const Likes = tw.div`
 	flex
 	text-pale-silver
@@ -96,7 +100,8 @@ export const LikeBtn = tw.button`
 	pl-2
 	my-0.5
 	hover:text-flame
-	hover:bg-vermillion
+	hover:bg-pale-silver
+	hover:bg-opacity-25
 	transition
 	ease-in-out
 	delay-150
@@ -104,7 +109,6 @@ export const LikeBtn = tw.button`
 	hover:scale-110
 	hover:drop-shadow-xl
 	drop-shadow-lg
-	text-md
 `
 
 export const LikeIcon = tw.div`
@@ -120,4 +124,23 @@ export const UnlikeIcon = tw.div`
 	text-2xl
 	pr-2
 	text-flame
+`
+
+export const CommentBtn = tw(Link)`
+	fa
+	fa-comment
+	text-2xl
+	pr-2
+	ml-20
+	hover:text-flame
+	hover:bg-opacity-25
+	transition
+	ease-in-out
+	delay-150
+	duration-300
+	hover:scale-110
+	hover:drop-shadow-xl
+	drop-shadow-lg
+	text-pale-silver
+	dark:text-umber
 `;

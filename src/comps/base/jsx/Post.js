@@ -13,7 +13,7 @@ import {
 
 import { convertTime } from '../../../convertTime'
 
-import { Base, User, Avatar, Name, Stats, Username, Time, TimeDot, Text, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon } from '../styles/postStyles'
+import { Base, User, Avatar, Name, Stats, Username, Time, TimeDot, Text, Analytics, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon, CommentBtn } from '../styles/postStyles'
 import { Dropdown, DropTop, DropBottom, DropAvatar, DropFollowBtn, DropStats, DropName, DropFollowInfo, DropUsername, DropBio, DropFollowStats } from '../styles/dropdownStyles'
 
 export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
@@ -183,20 +183,24 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 					{body}
 				</Text>
 
-				<Likes>
-					<LikeCount>
-						{likes !== [] ? `${likes.length} likes` : ''}
-					</LikeCount>
-					{likeId ? (
-						<LikeBtn onClick={handleUnlike}>
-							<UnlikeIcon/>
-						</LikeBtn>
-					) : (
-						<LikeBtn onClick={handleLike}>
-							<LikeIcon/>
-						</LikeBtn>
-					)}
-				</Likes>
+				<Analytics>
+					<Likes>
+						<LikeCount>
+							{likes !== [] ? `${likes.length} likes` : ''}
+						</LikeCount>
+						{likeId ? (
+							<LikeBtn onClick={handleUnlike}>
+								<UnlikeIcon/>
+							</LikeBtn>
+						) : (
+							<LikeBtn onClick={handleLike}>
+								<LikeIcon/>
+							</LikeBtn>
+						)}
+					</Likes>
+
+					<CommentBtn to={`/${username}/${id}`} />
+				</Analytics>
 			</div>
 		</Base>
 	)
