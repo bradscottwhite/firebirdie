@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import { API } from 'aws-amplify'
 import { listCommentsByPostId } from '../../../graphql/queries'
 
+import { convertTime } from '../../../convertTime'
+
 import { Comment } from './Comment'
 
 export const Timeline = ({ userData, postId, comments, setComments }) => {
@@ -25,7 +27,7 @@ export const Timeline = ({ userData, postId, comments, setComments }) => {
 	return (
 		<div>
 			{comments.map(props => (
-				<Comment userData={userData} {...props} />
+				<Comment userData={userData} {...props} postTime={convertTime(props.postTime)} />
 			))}
 		</div>
 	)

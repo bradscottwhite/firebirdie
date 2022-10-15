@@ -12,6 +12,8 @@ import {
 	deleteFollow
 } from '../../../graphql/mutations'
 
+import { convertTime } from '../../../convertTime'
+
 import { Page } from '../../base/jsx/Page'
 import { Base, Hero, Avatar, FollowBtn, UnfollowBtn, Body, Name, Username, Bio, Followers, FollowerCount } from '../styles/userStyles'
 import { Post } from '../../base/jsx/Post'
@@ -157,7 +159,7 @@ export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
 			</Base>
 
 			{posts.map(props => (
-				<Post userData={userData} {...props} />
+				<Post userData={userData} {...props} postTime={convertTime(props.postTime)} />
 			))}
 		</Page>
 	)

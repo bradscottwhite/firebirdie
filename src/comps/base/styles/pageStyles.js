@@ -1,7 +1,8 @@
 import tw from 'tailwind-styled-components'
 
 export const Base = tw.div`
-	w-3/4
+	w-full
+	sm:w-3/4
 	h-screen
 	overflow-hidden
 `
