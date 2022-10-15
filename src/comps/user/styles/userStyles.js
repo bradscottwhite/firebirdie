@@ -6,7 +6,7 @@ export const Base = tw.div`
 
 export const Hero = tw.div`
 	w-full
-	h-44
+	h-48
 	bg-gradient-to-br
 	from-flame
 	to-white
@@ -14,13 +14,32 @@ export const Hero = tw.div`
 `
 
 export const Avatar = tw.img`
-	w-14
-	h-14
+	w-32
+	h-32
 	rounded-full
-	ml-8
+	ml-12
 	mr-4
 	drop-shadow-xl
-	mt-[-1.5rem]
+	mt-[-4rem]
+`
+
+export const Bio = tw.div`
+	grid
+	pl-10
+	py-2
+`
+
+export const Name = tw.div`
+	font-semibold
+	text-umber
+	dark:text-pale-silver
+	text-xl
+`
+
+export const Username = tw.i`
+	pt-0
+	pb-2
+	text-md
 `
 
 ;

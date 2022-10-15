@@ -13,7 +13,7 @@ import {
 } from '../../../graphql/mutations'
 
 import { Page } from '../../base/jsx/Page'
-import { Base, Hero, Avatar } from '../styles/userStyles'
+import { Base, Hero, Avatar, Name, Username, Bio } from '../styles/userStyles'
 import { Post } from '../../base/jsx/Post'
 
 export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
@@ -127,7 +127,13 @@ export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
 					alt={username}
 					src={avatar}
 				/>
-				<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i> {username === userData.username && ' - You'}</h3>
+				
+				<Bio>
+					<Name>{name}</Name>
+					<Username>@{username}</Username>
+					...{username === userData.username && ' - You'}
+
+				</Bio>
 				
 				<p>{followers !== [] ? `${followers.length} followers` : ''}</p>
 				{(userData.username !== username) && (followId ? (

@@ -132,6 +132,7 @@ export const CommentBtn = tw(Link)`
 	text-2xl
 	pr-2
 	ml-20
+	mt-2
 	hover:text-flame
 	hover:bg-opacity-25
 	transition
