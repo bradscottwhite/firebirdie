@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+import { convertTime } from '../../../convertTime'
+
 import { API } from 'aws-amplify'
 // Fetch posts from users who they are following:
 // First get users followed then get posts from them 
@@ -85,7 +87,7 @@ export const Timeline = ({ userData, posts, setPosts }) => {
 				exit='closed'
 			>
 				{posts.map(props => (
-					<Post userData={userData} {...props} />
+					<Post userData={userData} {...props} postTime={convertTime(props.postTime)} />
 				))}
 			</motion.div>
 		</AnimatePresence>

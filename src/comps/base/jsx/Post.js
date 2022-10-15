@@ -10,8 +10,6 @@ import {
 	deletePostLike
 } from '../../../graphql/mutations'
 
-import { convertTime } from '../../../convertTime'
-
 import { Base, User, Avatar, Name, Stats, Username, Time, TimeDot, Text, Analytics, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon, CommentBtn } from '../styles/postStyles'
 import { Dropdown, DropTop, DropBottom, DropAvatar, DropFollowBtn, DropStats, DropName, DropFollowInfo, DropUsername, DropBio, DropFollowStats } from '../styles/dropdownStyles'
 
@@ -176,7 +174,7 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 
 					<Username>@{username}</Username>
 					<TimeDot>·</TimeDot>
-					<Time>{convertTime(postTime)}</Time>
+					<Time>{postTime}</Time>
 				</Stats>
 
 				<Text to={`/${username}/${id}`}>

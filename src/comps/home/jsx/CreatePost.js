@@ -44,10 +44,12 @@ export const CreatePost = ({ posts, setPosts, userData }) => {
 				onChange={e => setBody(e.target.value)}
 			/>
 
-			<PostBtn onClick={handlePost}>
-				<PostIcon/>
-				Post
-			</PostBtn>
+			<div className='flex justify-end'>
+				<PostBtn onClick={handlePost}>
+					<PostIcon/>
+					Post
+				</PostBtn>
+			</div>
 		</Base>
 	)
 };

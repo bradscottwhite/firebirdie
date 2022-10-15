@@ -9,7 +9,7 @@ import { Page } from '../../base/jsx/Page'
 import { Base, Avatar, Text, PostBtn, PostIcon } from '../styles/createPostStyles'
 
 export const CreatePostPage = ({ userData, darkMode, setDarkMode }) => {
-	const { username, avatar, name } = userData
+	const { username, avatar } = userData
 
 	const [ body, setBody ] = useState('')
 	
@@ -22,7 +22,7 @@ export const CreatePostPage = ({ userData, darkMode, setDarkMode }) => {
 					//likes: [],
 					authorId: username
 				}
-				const { data } = await API.graphql({
+				await API.graphql({
 					query: createPost,
 					variables: { input },
 					authMode: 'AMAZON_COGNITO_USER_POOLS'

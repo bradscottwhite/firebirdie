@@ -5,8 +5,9 @@ export const Base = tw.div`
 	border-isabelline
 	dark:border-cinereous
 	flex
-	pt-4
-	pb-8
+	pt-6
+	pb-10
+	justify-between
 `
 
 export const Avatar = tw.img`
@@ -27,12 +28,14 @@ export const Text = tw.input`
 	placeholder-isabelline
 	dark:placeholder-cinereous
 	focus:outline-none
+	flex-1
 `
 
 export const PostBtn = tw.button`
 	rounded-[3rem]
 	py-2
 	px-6
+	mr-6
 	text-flame
 	hover:text-vermillion
 	hover:bg-isabelline
