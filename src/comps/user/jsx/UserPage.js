@@ -13,7 +13,7 @@ import {
 } from '../../../graphql/mutations'
 
 import { Page } from '../../base/jsx/Page'
-import { Base, Hero, Avatar, Name, Username, Bio } from '../styles/userStyles'
+import { Hero, Avatar, FollowBtn, UnfollowBtn, Name, Username, Bio } from '../styles/userStyles'
 import { Post } from '../../base/jsx/Post'
 
 export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
@@ -121,12 +121,28 @@ export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
 
 	return (
 		<Page title={name} darkMode={darkMode} setDarkMode={setDarkMode}>
-			<Base>
+			<div>
 				<Hero/>
-				<Avatar
-					alt={username}
-					src={avatar}
-				/>
+			
+		
+				<div className='flex justify-between'>
+					<Avatar
+						alt={username}
+						src={avatar}
+					/>
+					
+					<div className='flex justify-end'>
+						{(userData.username !== username) && (followId ? (
+							<UnfollowBtn
+								onClick={handleUnfollow}
+							>Unfollow</UnfollowBtn>
+						) : (
+							<FollowBtn
+								onClick={handleFollow}
+							>Follow</FollowBtn>
+						))}
+					</div>
+				</div>
 				
 				<Bio>
 					<Name>{name}</Name>
@@ -136,18 +152,7 @@ export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
 				</Bio>
 				
 				<p>{followers !== [] ? `${followers.length} followers` : ''}</p>
-				{(userData.username !== username) && (followId ? (
-					<button
-						className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-						onClick={handleUnfollow}
-					>Unfollow</button>
-				) : (
-					<button
-						className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-						onClick={handleFollow}
-					>Follow</button>
-				))}
-			</Base>
+			</div>
 
 			{posts.map(props => (
 				<Post userData={userData} {...props} />
