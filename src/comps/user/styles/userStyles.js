@@ -1,5 +1,11 @@
 import tw from 'tailwind-styled-components'
 
+export const Base = tw.div`
+	border-b-[1px]
+	border-isabelline
+	dark:border-cinereous
+`
+
 export const Hero = tw.div`
 	w-full
 	h-48
@@ -72,7 +78,7 @@ export const UnfollowBtn = tw.button`
 	dark:border-cinereous
 `
 
-export const Bio = tw.div`
+export const Body = tw.div`
 	grid
 	pl-10
 	py-2
@@ -80,17 +86,33 @@ export const Bio = tw.div`
 
 export const Name = tw.div`
 	font-semibold
-	text-umber
-	dark:text-pale-silver
+	text-smoky-black
+	dark:text-white
 	text-xl
 `
 
 export const Username = tw.i`
 	pt-0
 	pb-2
-	text-md
 	text-pale-silver
 	dark:text-cinereous
 `
 
-;
+export const Bio = tw.div`
+	text-smoky-black
+	dark:text-white
+`
+
+export const Followers = tw.div`
+	text-pale-silver
+	dark:text-cinereous
+	flex
+	pt-3
+	pb-2
+`
+
+export const FollowerCount = tw.div`
+	text-smoky-black
+	dark:text-white
+	pr-1
+`;

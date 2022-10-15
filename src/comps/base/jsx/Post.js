@@ -58,7 +58,7 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 			const userLikes = {}
 			likes.map(({ owner, id }) => {
 				userLikes[owner] = id
-				return 0
+				return id
 			})
 			let valLikes = []
 			for (let owner in userLikes)

@@ -4,6 +4,7 @@ import { UserPage } from './comps/user/jsx/UserPage'
 import { PostPage } from './comps/post/jsx/PostPage'
 import { CommentPage } from './comps/comment/jsx/CommentPage'
 import { ExplorePage } from './comps/explore/jsx/ExplorePage'
+import { CreatePostPage } from './comps/createPost/jsx/CreatePostPage'
 
 export const routes = [
 	{
@@ -24,5 +25,8 @@ export const routes = [
 	}, {
 		path: '/explore',
 		El: ExplorePage
+	}, {
+		path: '/post',
+		El: CreatePostPage
 	}
 ];

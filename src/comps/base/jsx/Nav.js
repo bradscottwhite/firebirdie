@@ -11,13 +11,9 @@ export const Nav = ({ signOut, username }) => {
 			name: 'Explore',
 			icon: 'fa-hashtag'
 		}, {
-			path: '/post',//make route later
+			path: '/post',
 			name: 'Post',
 			icon: 'fa-pencil'
-		}, {
-			path: '/notifications', //make route later
-			name: 'Notifications',
-			icon: 'fa-bell'
 		}, {
 			path: '/settings',
 			name: 'Settings',

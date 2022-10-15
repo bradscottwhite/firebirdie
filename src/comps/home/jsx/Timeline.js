@@ -61,7 +61,7 @@ export const Timeline = ({ userData, posts, setPosts }) => {
 			opacity: 0,
 			y: '-100vh',
 			transition: {
-				duration: 2,
+				duration: 1,
 				staggerChildren: 0.2,
 				staggerDirection: -1
 			}
@@ -69,7 +69,7 @@ export const Timeline = ({ userData, posts, setPosts }) => {
 			opacity: 1,
 			y: 0,
 			transition: {
-				duration: 2,
+				duration: 1,
 				delayChildren: 0.2,
 				staggerChildren: 0.2,
 				staggerDirection: 1

@@ -28,7 +28,7 @@ module.exports = {
 			'acc-txt': '#CD6236',
 
 			'flame': '#E4491E',
-			'smoky-black': '#1A1614',
+			'smoky-black': '#341F19',//'#1A1614',
 			'umber': '#75645A',
 			'cinereous': '#877165',
 			'pale-silver': '#C2B3AB',

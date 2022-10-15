@@ -13,7 +13,7 @@ import {
 } from '../../../graphql/mutations'
 
 import { Page } from '../../base/jsx/Page'
-import { Hero, Avatar, FollowBtn, UnfollowBtn, Name, Username, Bio } from '../styles/userStyles'
+import { Base, Hero, Avatar, FollowBtn, UnfollowBtn, Body, Name, Username, Bio, Followers, FollowerCount } from '../styles/userStyles'
 import { Post } from '../../base/jsx/Post'
 
 export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
@@ -121,10 +121,9 @@ export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
 
 	return (
 		<Page title={name} darkMode={darkMode} setDarkMode={setDarkMode}>
-			<div>
+			<Base>
 				<Hero/>
 			
-		
 				<div className='flex justify-between'>
 					<Avatar
 						alt={username}
@@ -144,15 +143,18 @@ export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
 					</div>
 				</div>
 				
-				<Bio>
+				<Body>
 					<Name>{name}</Name>
 					<Username>@{username}</Username>
-					...{username === userData.username && ' - You'}
-
-				</Bio>
-				
-				<p>{followers !== [] ? `${followers.length} followers` : ''}</p>
-			</div>
+					<Bio>...</Bio>
+					<Followers>
+						<FollowerCount>
+							{followers !== [] ? followers.length : ''}
+						</FollowerCount>
+						Followers
+					</Followers>
+				</Body>
+			</Base>
 
 			{posts.map(props => (
 				<Post userData={userData} {...props} />
