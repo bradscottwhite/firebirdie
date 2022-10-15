@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { API } from 'aws-amplify'
@@ -9,8 +9,6 @@ import {
 import { Post } from '../../base/jsx/Post'
 
 export const Timeline = ({ userData, posts, setPosts }) => {
-	const { username } = userData
-
 	useEffect(() => {
 		const fetchPosts = async followData => {
 			try {
@@ -23,8 +21,7 @@ export const Timeline = ({ userData, posts, setPosts }) => {
 			}
 		}
 		fetchPosts()
-		// Subscribe....!!!
-	}, [])
+	}, [ setPosts ])
 
 	const variants = {
 		closed: {
@@ -53,7 +50,6 @@ export const Timeline = ({ userData, posts, setPosts }) => {
 				variants={variants}
 				animate='open'
 				exit='closed'
-				variants={variants}
 			>
 				{posts.map(props => (
 					<Post userData={userData} {...props} />

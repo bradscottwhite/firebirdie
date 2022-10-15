@@ -1,4 +1,4 @@
-import { Base, Logo, LogoSvg, NavLinks, NavLink, Icon, SignOut } from '../styles/navStyles'
+import { Base, Logo, LogoSvg, NavLinks, NavLink, Icon } from '../styles/navStyles'
 
 export const Nav = ({ signOut, username }) => {
 	const links = [

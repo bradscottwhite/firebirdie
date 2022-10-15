@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { API } from 'aws-amplify'
@@ -6,7 +6,6 @@ import { API } from 'aws-amplify'
 // First get users followed then get posts from them 
 import {
 	listPostsByAuthorId,
-	listFollows,
 	listFollowsByUserId
 } from '../../../graphql/queries'
 
@@ -14,8 +13,6 @@ import { Post } from '../../base/jsx/Post'
 
 export const Timeline = ({ userData, posts, setPosts }) => {
 	const { username } = userData
-
-	//const [ follows, setFollows ] = useState([])
 	
 	useEffect(() => {
 		const fetchFollowers = async () => {
@@ -57,7 +54,7 @@ export const Timeline = ({ userData, posts, setPosts }) => {
 		}
 		//fetchPosts()
 		// Subscribe....!!!
-	}, [ username ])
+	}, [ username, setPosts ])
 
 	const variants = {
 		closed: {
@@ -86,7 +83,6 @@ export const Timeline = ({ userData, posts, setPosts }) => {
 				variants={variants}
 				animate='open'
 				exit='closed'
-				variants={variants}
 			>
 				{posts.map(props => (
 					<Post userData={userData} {...props} />

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
 import {
@@ -59,6 +58,7 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 			const userLikes = {}
 			likes.map(({ owner, id }) => {
 				userLikes[owner] = id
+				return 0
 			})
 			let valLikes = []
 			for (let owner in userLikes)
@@ -68,7 +68,7 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 		}
 		
 		fetchPostLikes()
-	}, [ owner, userData.username ])
+	}, [ owner, userData.username, authorId, id ])
 
 	const handleLike = async () => {
 		try {
