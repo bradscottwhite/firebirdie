@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components'
 export const Base = tw.div`
 	w-full
 	sm:w-3/4
-	h-screen
+	sm:h-screen
 	overflow-hidden
 `
 
@@ -56,7 +56,8 @@ export const Body = tw.div`
 	overflow-y-scroll
 	w-full
 	sm:w-2/3
-	h-[calc(100vh-4rem)]
+	h-[calc(100vh-9rem)]
+	sm:h-[calc(100vh-4rem)]
 	border-r-[1px]
 	border-isabelline
 	dark:border-cinereous
