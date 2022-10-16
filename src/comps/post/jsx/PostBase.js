@@ -12,7 +12,7 @@ import {
 	deletePostLike
 } from '../../../graphql/mutations'
 
-import { Base, User, Avatar, Name, Stats, Username, Time, TimeDot, Text, Analytics, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon, DeleteBtn } from '../styles/postStyles'
+import { Base, User, Avatar, Name, UserInfo, Username, Time, Text, Analytics, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon, DeleteBtn } from '../styles/postStyles'
 
 import { UserDropdown } from '../../base/jsx/UserDropdown'
 
@@ -138,36 +138,22 @@ export const PostBase = ({ userData, id, body, postTime, username, name, avatar 
 	}
 
 	return (
-		<Base
-			variants={variants}
-			exit='closed'
-			key={id}
-		>
-			<User>
-				<Link to={`/${username}`}>
-					<Avatar
-						alt={username}
-						src={avatar}
-					/>
-				</Link>
-
-				<UserDropdown
-					name={name}
-					username={username}
-					avatar={avatar}
-					userData={userData}
-					followers={followers} setFollowers={setFollowers}
-					followId={followId} setFollowId={setFollowId}
-				/>
-			</User>
-
-			<div>
-				<Stats>
+		<div className='grid place-items-center'>
+			<Base
+				variants={variants}
+				exit='closed'
+				key={id}
+			>
+				<div className='flex'>
 					<User>
-						<Name to={`/${username}`}>{name}</Name>
+						<Link to={`/${username}`}>
+							<Avatar
+								alt={username}
+								src={avatar}
+							/>
+						</Link>
 
 						<UserDropdown
-							isName={true}
 							name={name}
 							username={username}
 							avatar={avatar}
@@ -177,15 +163,29 @@ export const PostBase = ({ userData, id, body, postTime, username, name, avatar 
 						/>
 					</User>
 
-					<Username>@{username}</Username>
-					<TimeDot>·</TimeDot>
-					<Time>{postTime}</Time>
-				</Stats>
+					<UserInfo>
+						<User>
+							<Name to={`/${username}`}>{name}</Name>
 
-				<Text to={`/${username}/${id}`}>
-					{body}
-				</Text>
+							<UserDropdown
+								isName={true}
+								name={name}
+								username={username}
+								avatar={avatar}
+								userData={userData}
+								followers={followers} setFollowers={setFollowers}
+								followId={followId} setFollowId={setFollowId}
+							/>
+						</User>
 
+						<Username>@{username}</Username>
+					</UserInfo>
+				</div>
+
+				<Text>{body}</Text>
+
+				<Time>{postTime}</Time>
+				
 				<Analytics>
 					<Likes>
 						<LikeCount>
@@ -210,7 +210,7 @@ export const PostBase = ({ userData, id, body, postTime, username, name, avatar 
 					)}
 				
 				</Analytics>
-			</div>
-		</Base>
+			</Base>
+		</div>
 	)
 };

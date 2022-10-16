@@ -22,7 +22,7 @@ export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
 	const { username } = useParams()
 
 	const [ posts, setPosts ] = useState([])
-	const [ { name, avatar }, setUserData ] = useState({})
+	const [ { name, avatar, bio }, setUserData ] = useState({})
 	
 	const [ followId, setFollowId ] = useState(false)
 	const [ followers, setFollowers ] = useState([])
@@ -148,7 +148,7 @@ export const UserPage = ({ userData, id, darkMode, setDarkMode }) => {
 				<Body>
 					<Name>{name}</Name>
 					<Username>@{username}</Username>
-					<Bio>...</Bio>
+					<Bio>{bio}</Bio>
 					<Followers>
 						<FollowerCount>
 							{followers !== [] ? followers.length : ''}

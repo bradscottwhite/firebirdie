@@ -78,7 +78,6 @@ export const TimeDot = tw.b`
 export const Text = tw(Link)`
 	text-smoky-black
 	dark:text-white
-	text-md
 `
 
 export const Analytics = tw.div`

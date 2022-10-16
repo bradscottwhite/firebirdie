@@ -8,10 +8,7 @@ import {
 
 import { Dropdown, DropTop, DropBottom, DropAvatar, DropFollowBtn, DropUnfollowBtn, DropName, DropUsername, DropBio, DropFollowers, DropFollowerCount } from '../styles/dropdownStyles'
 
-export const UserDropdown = ({ name, username, avatar, userData, followers, setFollowers, followId, setFollowId, isName }) => {
-	//console.log('Followers',followers)
-	//console.log('FollowId',followId)
-
+export const UserDropdown = ({ name, bio, username, avatar, userData, followers, setFollowers, followId, setFollowId, isName }) => {
 	const handleFollow = async () => {
 		try {
 			const { data } = await API.graphql({
@@ -81,7 +78,7 @@ export const UserDropdown = ({ name, username, avatar, userData, followers, setF
 				</Link>
 
 				<DropUsername>@{username}</DropUsername>
-				<DropBio>Bio...</DropBio>
+				<DropBio>{bio}</DropBio>
 				<DropFollowers>
 					<DropFollowerCount>
 						{followers !== [] ? followers.length : ''}

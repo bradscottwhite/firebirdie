@@ -17,7 +17,7 @@ import { Base, User, Avatar, Name, Stats, Username, Time, TimeDot, Text, Analyti
 import { UserDropdown } from './UserDropdown'
 
 export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
-	const [ { username, name, avatar }, setUserData ] = useState({})
+	const [ { username, name, avatar, bio }, setUserData ] = useState({})
 	
 	const [ likeId, setLikeId ] = useState(false)
 	const [ likes, setLikes ] = useState([])
@@ -156,6 +156,7 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 
 				<UserDropdown
 					name={name}
+					bio={bio}
 					username={username}
 					avatar={avatar}
 					userData={userData}
@@ -172,6 +173,7 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 						<UserDropdown
 							isName={true}
 							name={name}
+							bio={bio}
 							username={username}
 							avatar={avatar}
 							userData={userData}
