@@ -12,7 +12,8 @@ export const Base = tw.div`
 	overflow-hidden
 	bg-white
 	dark:bg-smoky-black
-	border-t-[1px]
+	${() => isMobile ? 'border-t-[1px]' : 'border-r-[1px]'}
+
 	sm:border-r-[1px]
 	border-isabelline
 	dark:border-cinereous

@@ -28,8 +28,10 @@ export const Avatar = tw.img`
 	w-10
 	h-10
 	rounded-full
-	ml-8
-	mr-4
+	ml-4
+	sm:ml-8
+	mr-3
+	sm:mr-4
 	drop-shadow-xl
 	x-0
 `
@@ -66,8 +68,10 @@ export const Time = tw.p`
 export const TimeDot = tw.b`
 	font-bold
 	text-2xl
-	pl-1
-	pr-3
+	pl-0.5
+	pr-2
+	sm:pl-1
+	sm:pr-3
 	mt-[-0.3rem]
 `
 

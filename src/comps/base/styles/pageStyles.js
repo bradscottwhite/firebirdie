@@ -1,5 +1,7 @@
 import tw from 'tailwind-styled-components'
 
+const isMobile = window.innerWidth <= 350
+
 export const Base = tw.div`
 	w-full
 	sm:w-3/4
@@ -56,7 +58,7 @@ export const Body = tw.div`
 	overflow-y-scroll
 	w-full
 	sm:w-2/3
-	h-[calc(100vh-9rem)]
+	${() =>  isMobile ? 'h-[calc(100vh-9rem)]' : 'h-[calc(100vh-4rem)]'}
 	sm:h-[calc(100vh-4rem)]
 	border-r-[1px]
 	border-isabelline
