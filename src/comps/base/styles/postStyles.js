@@ -144,4 +144,5 @@ export const CommentBtn = tw(Link)`
 	drop-shadow-lg
 	text-pale-silver
 	dark:text-umber
+	z-0
 `;

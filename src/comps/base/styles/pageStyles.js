@@ -9,7 +9,8 @@ export const Base = tw.div`
 
 export const Header = tw.div`
 	h-16
-	pl-20
+	pl-10
+	sm:pl-20
 	py-4
 	flex
 	border-b-[1px]
@@ -40,7 +41,8 @@ export const ModeIcon = tw.div`
 	text-smoky-black
 	dark:text-white
 	absolute
-	right-32
+	right-8
+	sm:right-32
 	transition
 	ease-in-out
 	delay-150

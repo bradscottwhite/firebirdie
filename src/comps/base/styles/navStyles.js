@@ -1,14 +1,23 @@
 import tw from 'tailwind-styled-components'
 import { Link } from 'react-router-dom'
 
+const isMobile = window.innerWidth <= 350
+
 export const Base = tw.div`
-	
+	${() => isMobile && 'w-screen'}
 	sm:w-1/4
-	h-screen
+	${() => isMobile ? 'absolute' : 'relative'}
+	bottom-0
+	sm:h-screen
 	overflow-hidden
-	border-r-[1px]
+	bg-white
+	dark:bg-smoky-black
+	border-t-[1px]
+	sm:border-r-[1px]
 	border-isabelline
 	dark:border-cinereous
+	z-50
+	sm:z-0
 `
 
 export const Logo = tw(Link)`
@@ -40,16 +49,19 @@ export const LogoSvg = tw.svg`
 
 export const NavLinks = tw.div`
 	flex
-	grid
+	sm:grid
+	${() => !isMobile && 'grid'}
 	w-full
 	justify-center
-	mt-8
+	mt-1
 `
 
 export const NavLink = tw(Link)`
 	w-full
 	py-4
 	px-6
+	mx-2
+	sm:mx-0
 	my-2
 	text-smoky-black
 	dark:text-white
