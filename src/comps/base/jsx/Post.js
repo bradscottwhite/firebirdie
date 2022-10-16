@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
 import {
 	getUserByUsername,
-	listPostLikesByPostId
+	listPostLikesByPostId,
+	listFollowsByFollowId
 } from '../../../graphql/queries'
 import {
 	createPostLike,
@@ -11,13 +13,17 @@ import {
 } from '../../../graphql/mutations'
 
 import { Base, User, Avatar, Name, Stats, Username, Time, TimeDot, Text, Analytics, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon, CommentBtn } from '../styles/postStyles'
-import { Dropdown, DropTop, DropBottom, DropAvatar, DropFollowBtn, DropStats, DropName, DropFollowInfo, DropUsername, DropBio, DropFollowStats } from '../styles/dropdownStyles'
+
+import { UserDropdown } from './UserDropdown'
 
 export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 	const [ { username, name, avatar }, setUserData ] = useState({})
 	
 	const [ likeId, setLikeId ] = useState(false)
 	const [ likes, setLikes ] = useState([])
+
+	const [ followId, setFollowId ] = useState(false)
+	const [ followers, setFollowers ] = useState([])
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -66,6 +72,37 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 		}
 		
 		fetchPostLikes()
+		
+		const fetchFollowers = async () => {
+			try {
+				const { data } = await API.graphql({
+					query: listFollowsByFollowId,
+					variables: { followId: authorId }
+				})
+				const valFollowers = validateFollowers(data.listFollowsByFollowId.items)
+				
+				for (let i in valFollowers)
+					if (valFollowers[i].owner === userData.username) {
+						setFollowId(valFollowers[i].id)
+						return
+					}
+			} catch (err) {
+				console.log('error fetching follower data', err)
+			}
+		}
+
+		const validateFollowers = followers => {
+			// Make sure each follow is valid by having one user for each one
+			const userFollowers = {}
+			followers.map(({ owner, id }) => userFollowers[owner] = id)
+			let valFollowers = []
+			for (let owner in userFollowers)
+				valFollowers.push({ id: userFollowers[owner], owner })
+			setFollowers(valFollowers)
+			return valFollowers
+		}
+		
+		fetchFollowers()
 	}, [ owner, userData.username, authorId, id ])
 
 	const handleLike = async () => {
@@ -109,67 +146,38 @@ export const Post = ({ userData, id, body, postTime, owner, authorId }) => {
 			exit='closed'
 			key={id}
 		>
-			<User to={`/${username}`}>
-				<Avatar
-					style={{
-						transformStyle: 'preserve-3d'
-					}}
-					alt={username}
-					src={avatar}
+			<User>
+				<Link to={`/${username}`}>
+					<Avatar
+						alt={username}
+						src={avatar}
+					/>
+				</Link>
+
+				<UserDropdown
+					name={name}
+					username={username}
+					avatar={avatar}
+					userData={userData}
+					followers={followers} setFollowers={setFollowers}
+					followId={followId} setFollowId={setFollowId}
 				/>
-
-				<Dropdown
-					style={{
-						transformStyle: 'preserve-3d'
-					}}
-				>
-					<DropTop>
-						<DropAvatar
-							alt={username}
-							src={avatar}
-						/>
-						<DropFollowBtn>Following..</DropFollowBtn>
-					</DropTop>
-
-					<DropBottom>
-						<DropName>{name}</DropName>
-						<DropStats>
-							<DropUsername>{username}</DropUsername>
-							<DropFollowInfo>Follows you..</DropFollowInfo>
-						</DropStats>
-						<DropBio>Bio...</DropBio>
-						<DropFollowStats>
-							3 Following
-							2 Followers
-						</DropFollowStats>
-					</DropBottom>
-				</Dropdown>
 			</User>
 
 			<div>
 				<Stats>
-					<User to={`/${username}`}>
-						<Name
-							style={{
-								transformStyle: 'preserve-3d'
-							}}
-						>{name}</Name>
+					<User>
+						<Name to={`/${username}`}>{name}</Name>
 
-						<Dropdown
-							style={{
-								transformStyle: 'preserve-3d'
-							}}
-							name
-						>
-							<Avatar
-								alt={username}
-								src={avatar}
-							/>
-							<div className='flex'>
-								<Name>{name}</Name>
-								<Username>{username}</Username>
-							</div>
-						</Dropdown>
+						<UserDropdown
+							isName={true}
+							name={name}
+							username={username}
+							avatar={avatar}
+							userData={userData}
+							followers={followers} setFollowers={setFollowers}
+							followId={followId} setFollowId={setFollowId}
+						/>
 					</User>
 
 					<Username>@{username}</Username>

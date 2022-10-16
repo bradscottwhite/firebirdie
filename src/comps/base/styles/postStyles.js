@@ -19,7 +19,7 @@ export const Base = tw(motion.div)`
 	hover:drop-shadow-md
 `
 
-export const User = tw(Link)`
+export const User = tw.div`
 	group
 	inline-block
 `
@@ -31,6 +31,7 @@ export const Avatar = tw.img`
 	ml-8
 	mr-4
 	drop-shadow-xl
+	x-0
 `
 
 
@@ -41,12 +42,11 @@ export const Stats = tw.div`
 	dark:text-umber
 `
 
-export const Name = tw.h3`
+export const Name = tw(Link)`
 	font-semibold
 	hover:underline
 	text-umber
 	dark:text-pale-silver
-	text-md
 	z-0
 	inline-flex
 	items-center
