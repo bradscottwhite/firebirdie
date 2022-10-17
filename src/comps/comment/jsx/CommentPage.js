@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
 import { getUserByUsername, getComment } from '../../../graphql/queries'
-import { deleteComment } from '../../../graphql/mutations'
 
 import { convertTimeToDate } from '../../../convertTimeToDate'
 
@@ -50,18 +49,6 @@ export const CommentPage = ({ userData, darkMode, setDarkMode }) => {
 		}
 		fetchComment()
 	}, [ username, id ])
-
-	const handleDelete = async () => {
-		try {
-			API.graphql({
-				query: deleteComment,
-				variables: { input: { id } },
-				authMode: 'AMAZON_COGNITO_USER_POOLS'
-			})
-		} catch (err) {
-			console.log('error deleting comment', err)
-		}
-	}
 
 	return (
 		<Page title='Comment' darkMode={darkMode} setDarkMode={setDarkMode}>

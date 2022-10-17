@@ -3,22 +3,32 @@ import { useState } from 'react'
 import { API } from 'aws-amplify'
 import { createUser } from '../../../graphql/mutations'
 
-export const CreateUser = ({ username, setUserData }) => {
+import { Page } from './Page'
+import { Base, Heading, Username, Fields, Field, Label, Text, SaveBtn, SaveIcon, Btn } from '../styles/createUserStyles'
+
+export const CreateUser = ({ username, setUserData, darkMode, setDarkMode }) => {
 	const [ name, setName ] = useState('')
-	const [ avatar, setAvatar ] = useState('')
+	//const [ avatar, setAvatar ] = useState('')
+	const [ bio, setBio ] = useState('')
+	const [ color, setColor ] = useState('')
 
 	const handleSubmit = async () => {
-		const letters = '0123456789ABCDEF'
-		let color = ''
-		for (let i = 0; i < 6; i++)
-			color += letters[Math.floor(Math.random() * 16)]
+		if (color === '') {
+			const letters = '0123456789ABCDEF'
+			let ranColor = ''
+			for (let i = 0; i < 6; i++)
+				ranColor += letters[Math.floor(Math.random() * 16)]
+			setColor(ranColor)
+		}
 
-		const avatarImg = avatar === '' ? `https://avatar.oxro.io/avatar.svg?name=${name}&background=${color}&length=1` : avatar
+		const avatarImg = `https://avatar.oxro.io/avatar.svg?name=${name}&background=${color}&length=1`
 		
 		const input = {
 			username,
 			name,
-			avatar: avatarImg
+			avatar: avatarImg,
+			bio: '',
+			color
 		}
 		await API.graphql({
 			query: createUser,
@@ -29,26 +39,48 @@ export const CreateUser = ({ username, setUserData }) => {
 	}
 
 	return (
-		<main>
-			<h1>Howdy {username}!</h1>
-			<h3>Setup user settings:</h3>
-			
-			<input
-				value={name}
-				placeholder='Profile name'
-				onChange={e => setName(e.target.value)}
-			/>
-			
-			<input
-				value={avatar}
-				placeholder='Avatar image url'
-				onChange={e => setAvatar(e.target.value)}
-			/>
+		<Page title='Create User' darkMode={darkMode} setDarkMode={setDarkMode}>
+			<Base>
+				<Heading>Howdy <Username>{username}</Username>!</Heading>
+				<Fields>
+					<Field>
+						<Label>Name:</Label>
+						<Text
+							value={name}
+							placeholder='Enter name'
+							onChange={e => setName(e.target.value)}
+						/>
+					</Field>
 
-			<button
-				className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-				onClick={handleSubmit}
-			>Set user settings</button>
-		</main>
+					<Field>
+						<Label>Bio:</Label>
+						<Text
+							value={bio}
+							placeholder='Enter bio text'
+							onChange={e => setBio(e.target.value)}
+						/>
+					</Field>
+					
+					<Field>
+						<Label>Color:</Label>
+						<Text
+							value={color}
+							placeholder='Enter hex color or have it randomly generated'
+							onChange={e => setColor(e.target.value)}
+						/>
+					</Field>
+				</Fields>
+
+				<Btn>
+					<SaveBtn
+						to={`/${username}`}
+						onClick={handleSubmit}
+					>
+						<SaveIcon/>
+						Submit
+					</SaveBtn>
+				</Btn>
+			</Base>
+		</Page>
 	)
 };

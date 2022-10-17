@@ -73,7 +73,7 @@ const LogIn = ({ username, signOut, darkMode, setDarkMode }) => {
 					userData ? (
 						<Router darkMode={darkMode} setDarkMode={setDarkMode} userData={userData} setUserData={setUserData} />
 					) : (
-						<CreateUser username={username} setUserData={setUserData} />
+						<CreateUser username={username} setUserData={setUserData} darkMode={darkMode} setDarkMode={setDarkMode} />
 					)
 				)}
 			</Wrapper>
