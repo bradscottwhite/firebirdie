@@ -12,11 +12,11 @@ import {
 	deletePostLike
 } from '../../../graphql/mutations'
 
-import { Base, User, Avatar, Name, UserInfo, Username, Time, Text, Analytics, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon, DeleteBtn } from '../styles/postStyles'
+import { Base, User, Avatar, Name, UserInfo, Username, Time, TimeDot, Text, Analytics, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon, DeleteBtn } from '../styles/postStyles'
 
 import { UserDropdown } from '../../base/jsx/UserDropdown'
 
-export const PostBase = ({ userData, id, body, postTime, username, name, avatar }) => {
+export const PostBase = ({ userData, id, body, postTime, username, name, avatar, bio }) => {
 	const [ likeId, setLikeId ] = useState(false)
 	const [ likes, setLikes ] = useState([])
 
@@ -155,6 +155,7 @@ export const PostBase = ({ userData, id, body, postTime, username, name, avatar 
 
 						<UserDropdown
 							name={name}
+							bio={bio}
 							username={username}
 							avatar={avatar}
 							userData={userData}
@@ -170,6 +171,7 @@ export const PostBase = ({ userData, id, body, postTime, username, name, avatar 
 							<UserDropdown
 								isName={true}
 								name={name}
+								bio={bio}
 								username={username}
 								avatar={avatar}
 								userData={userData}
@@ -184,7 +186,11 @@ export const PostBase = ({ userData, id, body, postTime, username, name, avatar 
 
 				<Text>{body}</Text>
 
-				<Time>{postTime}</Time>
+				<Time>
+					{postTime.time}
+					<TimeDot>·</TimeDot>
+					{postTime.date}
+				</Time>
 				
 				<Analytics>
 					<Likes>

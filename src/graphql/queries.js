@@ -29,6 +29,7 @@ export const getUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           postId
           createdAt
           updatedAt
@@ -49,6 +50,7 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
+      color
       following {
         items {
           id
@@ -89,6 +91,7 @@ export const listUsers = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
@@ -130,6 +133,7 @@ export const getUserByUsername = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
@@ -161,6 +165,7 @@ export const getFollow = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
@@ -192,6 +197,7 @@ export const listFollows = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -230,6 +236,7 @@ export const listFollowsByUserId = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -268,6 +275,7 @@ export const listFollowsByFollowId = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -304,6 +312,7 @@ export const getPost = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
@@ -317,6 +326,7 @@ export const getPost = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           postId
           createdAt
           updatedAt
@@ -362,6 +372,7 @@ export const listPosts = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -407,6 +418,7 @@ export const listPostsByAuthorId = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -443,6 +455,7 @@ export const getPostLike = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -555,12 +568,14 @@ export const getComment = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
         createdAt
         updatedAt
       }
+      authorId
       post {
         id
         owner
@@ -573,6 +588,7 @@ export const getComment = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -625,9 +641,66 @@ export const listComments = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
+        authorId
+        post {
+          id
+          owner
+          body
+          postTime
+          authorId
+          createdAt
+          updatedAt
+          userPostsId
+        }
+        postId
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        userCommentsId
+        postCommentsId
+      }
+      nextToken
+    }
+  }
+`;
+export const listCommentsByAuthorId = /* GraphQL */ `
+  query ListCommentsByAuthorId(
+    $authorId: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCommentsByAuthorId(
+      authorId: $authorId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        owner
+        body
+        postTime
+        author {
+          id
+          owner
+          username
+          name
+          avatar
+          bio
+          color
+          createdAt
+          updatedAt
+        }
+        authorId
         post {
           id
           owner
@@ -678,9 +751,11 @@ export const listCommentsByPostId = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
+        authorId
         post {
           id
           owner
@@ -722,9 +797,11 @@ export const getCommentLike = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
+        authorId
         post {
           id
           owner
@@ -766,6 +843,7 @@ export const listCommentLikes = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           postId
           createdAt
           updatedAt
@@ -804,6 +882,7 @@ export const listCommentLikesByCommentId = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           postId
           createdAt
           updatedAt

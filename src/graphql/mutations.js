@@ -25,6 +25,7 @@ export const updateFollow = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
@@ -60,6 +61,7 @@ export const updatePostLike = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -102,9 +104,11 @@ export const updateCommentLike = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
+        authorId
         post {
           id
           owner
@@ -161,6 +165,7 @@ export const createUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           postId
           createdAt
           updatedAt
@@ -181,6 +186,7 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
+      color
       following {
         items {
           id
@@ -229,6 +235,7 @@ export const updateUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           postId
           createdAt
           updatedAt
@@ -249,6 +256,7 @@ export const updateUser = /* GraphQL */ `
         }
         nextToken
       }
+      color
       following {
         items {
           id
@@ -297,6 +305,7 @@ export const deleteUser = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           postId
           createdAt
           updatedAt
@@ -317,6 +326,7 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
+      color
       following {
         items {
           id
@@ -358,6 +368,7 @@ export const createFollow = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
@@ -396,6 +407,7 @@ export const deleteFollow = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
@@ -436,6 +448,7 @@ export const createPost = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
@@ -449,6 +462,7 @@ export const createPost = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           postId
           createdAt
           updatedAt
@@ -501,6 +515,7 @@ export const updatePost = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
@@ -514,6 +529,7 @@ export const updatePost = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           postId
           createdAt
           updatedAt
@@ -566,6 +582,7 @@ export const deletePost = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
@@ -579,6 +596,7 @@ export const deletePost = /* GraphQL */ `
           owner
           body
           postTime
+          authorId
           postId
           createdAt
           updatedAt
@@ -626,6 +644,7 @@ export const createPostLike = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -668,6 +687,7 @@ export const deletePostLike = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -715,12 +735,14 @@ export const createComment = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
         createdAt
         updatedAt
       }
+      authorId
       post {
         id
         owner
@@ -733,6 +755,7 @@ export const createComment = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -792,12 +815,14 @@ export const updateComment = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
         createdAt
         updatedAt
       }
+      authorId
       post {
         id
         owner
@@ -810,6 +835,7 @@ export const updateComment = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -869,12 +895,14 @@ export const deleteComment = /* GraphQL */ `
         postLikes {
           nextToken
         }
+        color
         following {
           nextToken
         }
         createdAt
         updatedAt
       }
+      authorId
       post {
         id
         owner
@@ -887,6 +915,7 @@ export const deleteComment = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
@@ -941,9 +970,11 @@ export const createCommentLike = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
+        authorId
         post {
           id
           owner
@@ -990,9 +1021,11 @@ export const deleteCommentLike = /* GraphQL */ `
           name
           avatar
           bio
+          color
           createdAt
           updatedAt
         }
+        authorId
         post {
           id
           owner

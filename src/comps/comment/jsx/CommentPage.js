@@ -5,15 +5,21 @@ import { API } from 'aws-amplify'
 import { getUserByUsername, getComment } from '../../../graphql/queries'
 import { deleteComment } from '../../../graphql/mutations'
 
-import { convertTime } from '../../../convertTime'
+import { convertTimeToDate } from '../../../convertTimeToDate'
 
 import { Page } from '../../base/jsx/Page'
+import { PostBase } from '../../post/jsx/PostBase'
 
 export const CommentPage = ({ userData, darkMode, setDarkMode }) => {
 	const { username, /*postId,*/ commentId: id } = useParams()
 
 	const [ { body, postTime }, setCommentData ] = useState({})
-	const [ { name, avatar }, setUserData ] = useState({})
+	const [ { name, avatar, bio }, setUserData ] = useState({})
+
+	/*const { username, postId: id } = useParams()
+	
+	const [ { body, postTime }, setPostData ] = useState({})
+	const [ { name, avatar, bio }, setUserData ] = useState({})*/
 
 	//const [ comments, setComments ] = useState([])
 
@@ -59,29 +65,16 @@ export const CommentPage = ({ userData, darkMode, setDarkMode }) => {
 
 	return (
 		<Page title='Comment' darkMode={darkMode} setDarkMode={setDarkMode}>
-			<div>
-				<Link to={`/${username}`}>
-					<img
-						alt={username}
-						src={avatar}
-						className='w-10 h-10 rounded-3xl'
-					/>
-					<h3 className='text-xl text-orange-400'><b>{name}</b> <i>@{username}</i></h3>
-				</Link>
-				<h4> - {convertTime(postTime)}</h4>
-				
-				<p>{body}</p>
-				{/* likes, comments... */}
-				
-				{(userData.username === username) && (
-					<Link to='/'>
-						<button
-							className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-							onClick={handleDelete}
-						>Delete</button>
-					</Link>
-				)}
-			</div>
+			<PostBase
+				userData={userData}
+				id={id}
+				bio={bio}
+				body={body}
+				postTime={convertTimeToDate(postTime)}
+				username={username}
+				name={name}
+				avatar={avatar}
+			/>
 
 			{/*<CreateComment comments={comments} setComments={setComments} userData={{ username, avatar, name }} />*/}
 

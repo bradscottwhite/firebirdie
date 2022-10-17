@@ -17,6 +17,7 @@ type User @model
 	posts: [Post] @hasMany
 	comments: [Comment] @hasMany
 	postLikes: [PostLike] @hasMany
+	color: String
 # more fields ...
 	following: [Follow] @hasMany
 	#followers?
@@ -95,6 +96,7 @@ type Comment @model
 	body: String!
 	postTime: AWSDateTime!
 	author: User @belongsTo
+	authorId: String! @index(name: "byAuthorId", queryField: "listCommentsByAuthorId")
 	post: Post @belongsTo
 	postId: ID! @index(name: "byPostId", queryField: "listCommentsByPostId")
 	likes: [CommentLike] @hasMany
@@ -117,3 +119,4 @@ type CommentLike @model
 }
  
          
+ 

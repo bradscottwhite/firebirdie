@@ -6,27 +6,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-		colors: {
-			// Background colors (light theme):
-			'pri-bg': '#A81919',
-			'sec-bg': '#BA2121',
-			'acc-bg': '#BE2F14',
-			
-			// Text colors (light theme):
-			'pri-txt': '#C03810',
-			'sec-txt': '#C2410C',
-			'acc-txt': '#CD6236',
-			
-			// Background colors (light theme):
-			'pri-bg': '#A81919',
-			'sec-bg': '#BA2121',
-			'acc-bg': '#BE2F14',
-			
-			// Text colors (light theme):
-			'pri-txt': '#C03810',
-			'sec-txt': '#C2410C',
-			'acc-txt': '#CD6236',
-
+		colors: { // Color schema: https://coolors.co/e4491e-7f3725-4d271d-341f19-1a1614-75645a-877165-c2b3ab-ede6e1-fefcfb
 			'flame': '#E4491E',
 			'smoky-black': '#341F19',//'#1A1614',
 			'umber': '#75645A',
@@ -35,15 +15,13 @@ module.exports = {
 			'isabelline': '#EDE6E1',
 			'white': '#FEFCFB',
 			
-			'blue': '#1DA1F2',
+			/*'blue': '#1DA1F2',
 			'dark-blue': '#2795D9',
 			'light-blue': '#EFF9FF',
 			'dark': '#657786',
 			'light': '#AABBC2',
 			'lighter': '#E1E8ED',
-			'lightest': '#F5FBFA',
-
-			//...dark theme
+			'lightest': '#F5FBFA',*/
         }
 	},
   },

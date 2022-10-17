@@ -1,6 +1,7 @@
 import tw from 'tailwind-styled-components'
+import { Link } from 'react-router-dom'
 
-import { Base as OldBase, User as OldUser, Avatar as OldAvatar, Name as OldName, Stats as OldStats, Username as OldUsername, Time as OldTime, TimeDot as OldTimeDot, Analytics as OldAnalytics, Likes as OldLikes, LikeCount as OldLikeCount, LikeBtn as OldLikeBtn, LikeIcon as OldLikeIcon, UnlikeIcon as OldUnlikeIcon } from '../../base/styles/postStyles'
+import { User as OldUser, Avatar as OldAvatar, Name as OldName, Stats as OldStats, Username as OldUsername, Time as OldTime, TimeDot as OldTimeDot, Analytics as OldAnalytics, Likes as OldLikes, LikeCount as OldLikeCount, LikeBtn as OldLikeBtn, LikeIcon as OldLikeIcon, UnlikeIcon as OldUnlikeIcon } from '../../base/styles/postStyles'
 
 export const Base = tw.div`
 	/*sm:w-[87.5vw]*/
@@ -14,14 +15,8 @@ export const Base = tw.div`
 	pb-2
 `
 
-export const User = tw(OldUser)``
-
-export const Avatar = tw(OldAvatar)`
-	w-14
-	h-14
-	mt-[-0.5rem]
-`
-
+export const User = OldUser
+export const Avatar = OldAvatar
 export const Name = OldName
 
 export const UserInfo = tw(OldStats)`grid`
@@ -36,10 +31,17 @@ export const Text = tw.p`
 `
 
 export const Time = tw(OldTime)`
+	py-2
 	px-4
 	sm:px-8
 	text-pale-silver
 	dark:text-umber
+	flex
+`
+
+export const TimeDot = tw(OldTimeDot)`
+	ml-2
+	mt-[-0.4rem]
 `
 
 export const Analytics = tw(OldAnalytics)`
@@ -51,22 +53,22 @@ export const Analytics = tw(OldAnalytics)`
 	dark:border-cinereous
 `
 
-export const Likes = tw(OldLikes)`
-`
+export const Likes = OldLikes
+export const LikeCount = OldLikeCount
+export const LikeBtn = OldLikeBtn
+export const LikeIcon = OldLikeIcon
+export const UnlikeIcon = OldUnlikeIcon
 
-export const LikeCount = tw(OldLikeCount)``
-export const LikeBtn = tw(OldLikeBtn)``
-export const LikeIcon = tw(OldLikeIcon)``
-export const UnlikeIcon = tw(OldUnlikeIcon)``
-
-export const DeleteBtn = tw.button`
+export const DeleteBtn = tw(Link)`
 	fa
 	fa-trash
 	text-2xl
-	pr-2
+	px-2
 	ml-20
-	mt-2
+	my-2
 	hover:text-flame
+	hover:bg-pale-silver
+	rounded-full
 	hover:bg-opacity-25
 	transition
 	ease-in-out

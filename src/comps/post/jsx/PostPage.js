@@ -7,7 +7,7 @@ import {
 	getPost 
 } from '../../../graphql/queries'
 
-import { convertTime } from '../../../convertTime'
+import { convertTimeToDate } from '../../../convertTimeToDate'
 
 import { Page } from '../../base/jsx/Page'
 import { PostBase } from './PostBase'
@@ -18,7 +18,7 @@ export const PostPage = ({ userData, darkMode, setDarkMode }) => {
 	const { username, postId: id } = useParams()
 	
 	const [ { body, postTime }, setPostData ] = useState({})
-	const [ { name, avatar }, setUserData ] = useState({})
+	const [ { name, avatar, bio }, setUserData ] = useState({})
 
 	const [ comments, setComments ] = useState([])
 
@@ -56,8 +56,9 @@ export const PostPage = ({ userData, darkMode, setDarkMode }) => {
 			<PostBase
 				userData={userData}
 				id={id}
+				bio={bio}
 				body={body}
-				postTime={convertTime(postTime)}
+				postTime={convertTimeToDate(postTime)}
 				username={username}
 				name={name}
 				avatar={avatar}

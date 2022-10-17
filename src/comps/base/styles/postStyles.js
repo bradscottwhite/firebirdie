@@ -36,7 +36,6 @@ export const Avatar = tw.img`
 	x-0
 `
 
-
 export const Stats = tw.div`
 	flex
 	mb-2

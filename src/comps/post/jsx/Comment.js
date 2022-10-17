@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { API } from 'aws-amplify'
 import {
 	getUserByUsername,
-	listCommentLikesByCommentId
+	listCommentLikesByCommentId,
+	listFollowsByFollowId
 } from '../../../graphql/queries'
 import {
 	createCommentLike,
@@ -13,14 +14,18 @@ import {
 
 import { convertTime } from '../../../convertTime'
 
-import { Avatar, Username } from '../../base/styles/userStyles'
-import { Base } from '../../base/styles/postStyles'
+import { Base, User, Avatar, Name, Stats, Username, Time, TimeDot, Text, Analytics, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon, CommentBtn } from '../../base/styles/postStyles'
 
-export const Comment = ({ userData, postId, id, body, postTime, owner }) => {
-	const [ { username, name, avatar }, setUserData ] = useState({})
+import { UserDropdown } from '../../base/jsx/UserDropdown'
+
+export const Comment = ({ userData, id, postId, body, postTime, owner, authorId }) => {
+	const [ { username, name, avatar, bio }, setUserData ] = useState({})
 
 	const [ likeId, setLikeId ] = useState(false)
 	const [ likes, setLikes ] = useState([])
+
+	const [ followId, setFollowId ] = useState(false)
+	const [ followers, setFollowers ] = useState([])
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -68,7 +73,38 @@ export const Comment = ({ userData, postId, id, body, postTime, owner }) => {
 		}
 		
 		fetchCommentLikes()
-	}, [ owner ])
+		
+		const fetchFollowers = async () => {
+			try {
+				const { data } = await API.graphql({
+					query: listFollowsByFollowId,
+					variables: { followId: owner }
+				})
+				const valFollowers = validateFollowers(data.listFollowsByFollowId.items)
+				
+				for (let i in valFollowers)
+					if (valFollowers[i].owner === userData.username) {
+						setFollowId(valFollowers[i].id)
+						return
+					}
+			} catch (err) {
+				console.log('error fetching follower data', err)
+			}
+		}
+
+		const validateFollowers = followers => {
+			// Make sure each follow is valid by having one user for each one
+			const userFollowers = {}
+			followers.map(({ owner, id }) => userFollowers[owner] = id)
+			let valFollowers = []
+			for (let owner in userFollowers)
+				valFollowers.push({ id: userFollowers[owner], owner })
+			setFollowers(valFollowers)
+			return valFollowers
+		}
+		
+		fetchFollowers()
+	}, [ owner, userData.username, authorId, id ])
 
 	const handleLike = async () => {
 		try {
@@ -78,7 +114,7 @@ export const Comment = ({ userData, postId, id, body, postTime, owner }) => {
 				authMode: 'AMAZON_COGNITO_USER_POOLS'
 			})
 			
-			setLikes([ ...likes, data.createPostLike ])
+			setLikes([ ...likes, data.createCommentLike ])
 			setLikeId(data.createCommentLike.id)
 		} catch (err) {
 			console.log('error liking comment', err)
@@ -100,35 +136,81 @@ export const Comment = ({ userData, postId, id, body, postTime, owner }) => {
 		}
 	}	
 
+	const variants = {
+		closed: { opacity: 0 },
+		open: { opacity: 1 }
+	}
+
 	return (
-		<Base>
-			<Link to={`/${username}`}>
-				<Avatar
-					alt={username}
-					src={avatar}
-					className='w-10 h-10 rounded-3xl'
+		<Base
+			variants={variants}
+			exit='closed'
+			key={id}
+		>
+			<User>
+				<Link to={`/${username}`}>
+					<Avatar
+						alt={username}
+						src={avatar}
+					/>
+				</Link>
+
+				<UserDropdown
+					name={name}
+					bio={bio}
+					username={username}
+					avatar={avatar}
+					userData={userData}
+					followers={followers} setFollowers={setFollowers}
+					followId={followId} setFollowId={setFollowId}
 				/>
-				<Username><b>{name}</b> <i>@{username}</i></Username>
-			</Link>
-			<h4> - {convertTime(postTime)}</h4>
-			
-			<Link to={`/${username}/${postId}/${id}`}>
-				<p>{body}</p>
-				{/* likes, comments... */}
-			</Link>	
-			
-			<p>{likes !== [] ? `${likes.length} likes` : ''}</p>
-			{likeId ? (
-				<button
-					className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-					onClick={handleUnlike}
-				>Unlike</button>
-			) : (
-				<button
-					className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-					onClick={handleLike}
-				>Like</button>
-			)}
+			</User>
+
+			<div>
+				<Stats>
+					<User>
+						<Name to={`/${username}`}>{name}</Name>
+
+						<UserDropdown
+							isName={true}
+							name={name}
+							bio={bio}
+							username={username}
+							avatar={avatar}
+							userData={userData}
+							followers={followers} setFollowers={setFollowers}
+							followId={followId} setFollowId={setFollowId}
+						/>
+					</User>
+
+					<Username>@{username}</Username>
+					<TimeDot>·</TimeDot>
+					<Time>{postTime}</Time>
+				</Stats>
+
+				<Text to={`/${username}/${postId}/${id}`}>
+					{body}
+				</Text>
+
+				<Analytics>
+					<Likes>
+						<LikeCount>
+							{likes !== [] ? `${likes.length} likes` : ''}
+						</LikeCount>
+						{likeId ? (
+							<LikeBtn onClick={handleUnlike}>
+								<UnlikeIcon/>
+							</LikeBtn>
+						) : (
+							<LikeBtn onClick={handleLike}>
+								<LikeIcon/>
+							</LikeBtn>
+						)}
+					</Likes>
+
+					<CommentBtn to={`/${username}/${postId}/${id}`} />
+				</Analytics>
+			</div>
 		</Base>
 	)
 };
