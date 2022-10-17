@@ -5,26 +5,37 @@ import { API } from 'aws-amplify'
 import { updateUser } from '../../../graphql/mutations'
 
 import { Page } from '../../base/jsx/Page'
+import { Base, Fields, Field, Label, Text, CancelBtn, CancelIcon, SaveBtn, SaveIcon, Btns } from '../styles/settingsStyles'
 
-export const SettingsPage  = ({ userData: { id, username, name, avatar }, setUserData, darkMode, setDarkMode }) => {
+export const SettingsPage  = ({ userData: { id, username, name, avatar, bio, color }, setUserData, darkMode, setDarkMode }) => {
 	const [ newName, setName ] = useState(name)
-	const [ newAvatar, setAvatar ] = useState(avatar)
+	const [ newUsername, setUsername ] = useState(username)
+	const [ newBio, setBio ] = useState(bio)
+	//const [ newAvatar, setAvatar ] = useState(avatar)
+	const [ newColor, setColor ] = useState(color)
 
 	const handleUpdate = async () => {
-		if (newName !== name || newAvatar !== avatar)
+		if (
+			newName !== name
+			|| newUsername !== username
+			//|| newAvatar !== avatar
+			|| newBio !== bio
+			|| newColor !== color
+		)
 			try {
 				const input = {
 					id,
-					username,
+					username: newUsername,
 					name: newName,
-					avatar: newAvatar
+					avatar: `https://avatar.oxro.io/avatar.svg?name=${newName}&background=${newColor}&length=1`,
+					bio: newBio,
+					color: newColor
 				}
 				await API.graphql({
 					query: updateUser,
 					variables: { input, codition: user => user.id === id },
 					authMode: 'AMAZON_COGNITO_USER_POOLS'
 				})
-				console.log(input)
 				setUserData(input)
 			} catch (err) {
 				console.log('error updating user settings', err)
@@ -33,29 +44,59 @@ export const SettingsPage  = ({ userData: { id, username, name, avatar }, setUse
 
 	return (
 		<Page title='User Settings' darkMode={darkMode} setDarkMode={setDarkMode}>
-			<p>Name</p>
-			<input
-				value={newName}
-				placeholder='Name'
-				onChange={e => setName(e.target.value)}
-			/>
-			
-			<p>Avatar</p>
-			<input
-				value={newAvatar}
-				placeholder='Avatar'
-				onChange={e => setAvatar(e.target.value)}
-			/>
+			<Base>
+				<Fields>
+					{/*<Text
+						value={newUsername}
+						placeholder='Enter new username'
+						onChange={e => (e.target.value)}
+					/>*/}
+				
+					<Field>
+						<Label>Name:</Label>
+						<Text
+							value={newName}
+							placeholder='Enter a new name'
+							onChange={e => setName(e.target.value)}
+						/>
+					</Field>
 
-			
-			<button
-				className='bg-orange-600 hover:bg-purple-400 py-2 px-4 transition ease-in-out delay-150 duration-300 rounded-md hover:scale-110'
-				onClick={handleUpdate}
-			>
-				<Link to='/'>Update user settings</Link>
-			</button>
-			
-			<Link to='/'>Home</Link>
+					<Field>
+						<Label>Bio:</Label>
+						<Text
+							value={newBio}
+							placeholder='Enter a new bio'
+							onChange={e => setBio(e.target.value)}
+						/>
+					</Field>
+					
+					<Field>
+						<Label>Color:</Label>
+						<Text
+							value={newColor}
+							placeholder='Enter a new color'
+							onChange={e => setColor(e.target.value)}
+						/>
+					</Field>
+				</Fields>
+
+				<Btns>
+					<CancelBtn
+						to={`/${newUsername}`}
+					>
+						<CancelIcon/>
+						Cancel
+					</CancelBtn>
+
+					<SaveBtn
+						to={`/${newUsername}`}
+						onClick={handleUpdate}
+					>
+						<SaveIcon/>
+						Save
+					</SaveBtn>
+				</Btns>
+			</Base>
 		</Page>
 	)
 };
