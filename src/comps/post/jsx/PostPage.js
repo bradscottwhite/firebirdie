@@ -52,7 +52,7 @@ export const PostPage = ({ userData, darkMode, setDarkMode }) => {
 	}, [ username, id, userData.username ])
 	
 	return (
-		<Page title='Post'>
+		<Page title='Post' darkMode={darkMode} setDarkMode={setDarkMode}>
 			<PostBase
 				userData={userData}
 				id={id}

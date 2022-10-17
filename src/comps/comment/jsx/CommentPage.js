@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
 import { getUserByUsername, getComment } from '../../../graphql/queries'
@@ -8,7 +8,7 @@ import { deleteComment } from '../../../graphql/mutations'
 import { convertTimeToDate } from '../../../convertTimeToDate'
 
 import { Page } from '../../base/jsx/Page'
-import { PostBase } from '../../post/jsx/PostBase'
+import { CommentBase } from './CommentBase'
 
 export const CommentPage = ({ userData, darkMode, setDarkMode }) => {
 	const { username, /*postId,*/ commentId: id } = useParams()
@@ -65,7 +65,7 @@ export const CommentPage = ({ userData, darkMode, setDarkMode }) => {
 
 	return (
 		<Page title='Comment' darkMode={darkMode} setDarkMode={setDarkMode}>
-			<PostBase
+			<CommentBase
 				userData={userData}
 				id={id}
 				bio={bio}

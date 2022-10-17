@@ -6,7 +6,7 @@ import { createPost } from '../../../graphql/mutations'
 import { Base, Avatar, Text, PostBtn, PostIcon } from '../styles/createPostStyles'
 
 export const CreatePost = ({ posts, setPosts, userData }) => {
-	const { username, avatar, name } = userData
+	const { username, avatar } = userData
 
 	const [ body, setBody ] = useState('')
 	

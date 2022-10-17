@@ -3,22 +3,20 @@ import { Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
 import {
-	getUserByUsername,
 	listCommentLikesByCommentId,
 	listFollowsByFollowId
 } from '../../../graphql/queries'
 import {
+	deleteComment,
 	createCommentLike,
 	deleteCommentLike
 } from '../../../graphql/mutations'
 
-import { Base, User, Avatar, Name, Stats, Username, Time, TimeDot, Text, Analytics, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon, CommentBtn } from '../../base/styles/postStyles'
+import { Base, User, Avatar, Name, UserInfo, Username, Time, TimeDot, Text, Analytics, Likes, LikeCount, LikeBtn, LikeIcon, UnlikeIcon, DeleteBtn } from '../../post/styles/postStyles'
 
 import { UserDropdown } from '../../base/jsx/UserDropdown'
 
-export const Comment = ({ userData, id, postId, body, postTime, owner, authorId }) => {
-	const [ { username, name, avatar, bio }, setUserData ] = useState({})
-
+export const CommentBase = ({ userData, id, body, postTime, username, name, avatar, bio }) => {
 	const [ likeId, setLikeId ] = useState(false)
 	const [ likes, setLikes ] = useState([])
 
@@ -26,20 +24,7 @@ export const Comment = ({ userData, id, postId, body, postTime, owner, authorId 
 	const [ followers, setFollowers ] = useState([])
 
 	useEffect(() => {
-		const fetchUser = async () => {
-			try {
-				const { data } = await API.graphql({
-					query: getUserByUsername,
-					variables: { username: owner }
-				})
-				setUserData(data.getUserByUsername.items[0])
-			} catch (err) {
-				console.log('error fetching user data', err)
-			}
-		}
-		fetchUser()
-
-		const fetchCommentLikes = async () => {
+		const fetchPostLikes = async () => {
 			try {
 				const { data } = await API.graphql({
 					query: listCommentLikesByCommentId,
@@ -62,6 +47,7 @@ export const Comment = ({ userData, id, postId, body, postTime, owner, authorId 
 			const userLikes = {}
 			likes.map(({ owner, id }) => {
 				userLikes[owner] = id
+				return id
 			})
 			let valLikes = []
 			for (let owner in userLikes)
@@ -70,13 +56,13 @@ export const Comment = ({ userData, id, postId, body, postTime, owner, authorId 
 			return valLikes
 		}
 		
-		fetchCommentLikes()
+		fetchPostLikes()
 		
 		const fetchFollowers = async () => {
 			try {
 				const { data } = await API.graphql({
 					query: listFollowsByFollowId,
-					variables: { followId: owner }
+					variables: { followId: username }
 				})
 				const valFollowers = validateFollowers(data.listFollowsByFollowId.items)
 				
@@ -102,7 +88,7 @@ export const Comment = ({ userData, id, postId, body, postTime, owner, authorId 
 		}
 		
 		fetchFollowers()
-	}, [ owner, userData.username, authorId, id ])
+	}, [ userData.username, username, id ])
 
 	const handleLike = async () => {
 		try {
@@ -111,7 +97,7 @@ export const Comment = ({ userData, id, postId, body, postTime, owner, authorId 
 				variables: { input: { commentId: id } },
 				authMode: 'AMAZON_COGNITO_USER_POOLS'
 			})
-			
+
 			setLikes([ ...likes, data.createCommentLike ])
 			setLikeId(data.createCommentLike.id)
 		} catch (err) {
@@ -132,7 +118,19 @@ export const Comment = ({ userData, id, postId, body, postTime, owner, authorId 
 		} catch (err) {
 			console.log('error unliking comment', err)
 		}
-	}	
+	}
+
+	const handleDelete = async () => {
+		try {
+			API.graphql({
+				query: deleteComment,
+				variables: { input: { id } },
+				authMode: 'AMAZON_COGNITO_USER_POOLS'
+			})
+		} catch (err) {
+			console.log('error deleting comment', err)
+		}
+	}
 
 	const variants = {
 		closed: { opacity: 0 },
@@ -140,37 +138,22 @@ export const Comment = ({ userData, id, postId, body, postTime, owner, authorId 
 	}
 
 	return (
-		<Base
-			variants={variants}
-			exit='closed'
-			key={id}
-		>
-			<User>
-				<Link to={`/${username}`}>
-					<Avatar
-						alt={username}
-						src={avatar}
-					/>
-				</Link>
-
-				<UserDropdown
-					name={name}
-					bio={bio}
-					username={username}
-					avatar={avatar}
-					userData={userData}
-					followers={followers} setFollowers={setFollowers}
-					followId={followId} setFollowId={setFollowId}
-				/>
-			</User>
-
-			<div>
-				<Stats>
+		<div className='grid place-items-center'>
+			<Base
+				variants={variants}
+				exit='closed'
+				key={id}
+			>
+				<div className='flex'>
 					<User>
-						<Name to={`/${username}`}>{name}</Name>
+						<Link to={`/${username}`}>
+							<Avatar
+								alt={username}
+								src={avatar}
+							/>
+						</Link>
 
 						<UserDropdown
-							isName={true}
 							name={name}
 							bio={bio}
 							username={username}
@@ -181,15 +164,34 @@ export const Comment = ({ userData, id, postId, body, postTime, owner, authorId 
 						/>
 					</User>
 
-					<Username>@{username}</Username>
+					<UserInfo>
+						<User>
+							<Name to={`/${username}`}>{name}</Name>
+
+							<UserDropdown
+								isName={true}
+								name={name}
+								bio={bio}
+								username={username}
+								avatar={avatar}
+								userData={userData}
+								followers={followers} setFollowers={setFollowers}
+								followId={followId} setFollowId={setFollowId}
+							/>
+						</User>
+
+						<Username>@{username}</Username>
+					</UserInfo>
+				</div>
+
+				<Text>{body}</Text>
+
+				<Time>
+					{postTime.time}
 					<TimeDot>·</TimeDot>
-					<Time>{postTime}</Time>
-				</Stats>
-
-				<Text to={`/${username}/${postId}/${id}`}>
-					{body}
-				</Text>
-
+					{postTime.date}
+				</Time>
+				
 				<Analytics>
 					<Likes>
 						<LikeCount>
@@ -206,9 +208,15 @@ export const Comment = ({ userData, id, postId, body, postTime, owner, authorId 
 						)}
 					</Likes>
 
-					<CommentBtn to={`/${username}/${postId}/${id}`} />
+					{(userData.username === username) && (
+						<DeleteBtn
+							onClick={handleDelete}
+							to='/'
+						/>
+					)}
+				
 				</Analytics>
-			</div>
-		</Base>
+			</Base>
+		</div>
 	)
 };

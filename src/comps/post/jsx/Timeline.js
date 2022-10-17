@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { API } from 'aws-amplify'
 import { listCommentsByPostId } from '../../../graphql/queries'
@@ -22,7 +22,7 @@ export const Timeline = ({ userData, postId, comments, setComments }) => {
 		}
 		fetchComments()
 		// Subscribe....!!!
-	}, [])
+	}, [ postId, setComments ])
 	
 	return (
 		<div>

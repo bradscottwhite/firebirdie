@@ -6,7 +6,7 @@ import { createComment } from '../../../graphql/mutations'
 import { Base, Avatar, Text, PostBtn, PostIcon } from '../../home/styles/createPostStyles'
 
 export const CreateComment = ({ userData, postId, comments, setComments }) => {
-	const { username, avatar, name } = userData
+	const { username, avatar } = userData
 
 	const [ body, setBody ] = useState('')
 
@@ -16,7 +16,8 @@ export const CreateComment = ({ userData, postId, comments, setComments }) => {
 				const input = {
 					body,
 					postTime: new Date().toISOString(),
-					postId
+					postId,
+					authorId: username
 				}
 				const { data } = await API.graphql({
 					query: createComment,

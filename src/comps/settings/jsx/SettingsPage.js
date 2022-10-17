@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 import { API } from 'aws-amplify'
 import { updateUser } from '../../../graphql/mutations'
@@ -9,7 +8,7 @@ import { Base, Fields, Field, Label, Text, CancelBtn, CancelIcon, SaveBtn, SaveI
 
 export const SettingsPage  = ({ userData: { id, username, name, avatar, bio, color }, setUserData, darkMode, setDarkMode }) => {
 	const [ newName, setName ] = useState(name)
-	const [ newUsername, setUsername ] = useState(username)
+//	const [ newUsername, setUsername ] = useState(username)
 	const [ newBio, setBio ] = useState(bio)
 	//const [ newAvatar, setAvatar ] = useState(avatar)
 	const [ newColor, setColor ] = useState(color)
@@ -17,7 +16,7 @@ export const SettingsPage  = ({ userData: { id, username, name, avatar, bio, col
 	const handleUpdate = async () => {
 		if (
 			newName !== name
-			|| newUsername !== username
+			//|| newUsername !== username
 			//|| newAvatar !== avatar
 			|| newBio !== bio
 			|| newColor !== color
@@ -25,7 +24,7 @@ export const SettingsPage  = ({ userData: { id, username, name, avatar, bio, col
 			try {
 				const input = {
 					id,
-					username: newUsername,
+					username,//: newUsername,
 					name: newName,
 					avatar: `https://avatar.oxro.io/avatar.svg?name=${newName}&background=${newColor}&length=1`,
 					bio: newBio,
@@ -82,14 +81,14 @@ export const SettingsPage  = ({ userData: { id, username, name, avatar, bio, col
 
 				<Btns>
 					<CancelBtn
-						to={`/${newUsername}`}
+						to={`/${username}`}
 					>
 						<CancelIcon/>
 						Cancel
 					</CancelBtn>
 
 					<SaveBtn
-						to={`/${newUsername}`}
+						to={`/${username}`}
 						onClick={handleUpdate}
 					>
 						<SaveIcon/>
